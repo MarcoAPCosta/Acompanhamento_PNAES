@@ -28,7 +28,7 @@ server <- function(id, dados) {
       selectInput(
         ns("dr"),
         "Escolha o departamento regional:",
-        choices =  c("BR", opcoes)
+        choices = c("BR", opcoes)
       )
     })
     
