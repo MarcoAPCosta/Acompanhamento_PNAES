@@ -8,7 +8,8 @@ box::use(
   app/view/grafico_taxa,
   app/view/dados,
   app/view/tp_aparelho,
-  app/view/mapa
+  app/view/mapa,
+  app/view/tabela
 )
 
 #' @export
@@ -64,7 +65,10 @@ ui <- function(id) {
       col_widths = c(6,6),
       card(
         full_screen = TRUE,
-        card_header("Teste1")
+        card_header("Total de Válidos e Taxa de Resposta"),
+        card_body(
+          tabela$ui(ns("tabela"))
+        )
       ),
       card(
         full_screen = TRUE,
@@ -89,10 +93,12 @@ server <- function(id) {
     
     selecao <- select_DR$server("selecao", dados)
     
-     grafico_taxa$server("taxa", dados)
+     grafico_taxa$server("taxa", dados, selecao)
      
     tp_aparelho$server("tp", dados, selecao)
     
     mapa$server("mapa", brasil,  dados)
+    
+    tabela$server("tabela", dados)
   })
 }
