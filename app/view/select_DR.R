@@ -18,6 +18,8 @@ ui <- function(id) {
 #' @export
 server <- function(id, dados) {
   moduleServer(id, function(input, output, session) {
+    
+    ns <- session$ns
 
     output$asd <- renderUI({
       opcoes <-  dados()$DR %>% unique() %>% sort()
@@ -25,7 +27,7 @@ server <- function(id, dados) {
       selectInput(
         ns("dr"),
         "Escolha o departamento regional:",
-        choices =  choices = c("BR", opcoes)
+        choices = c("BR", opcoes)
       )
     })
     
