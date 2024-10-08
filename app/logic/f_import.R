@@ -1,19 +1,18 @@
 box::use(
-  dplyr[`%>%`, as_tibble,
-        bind_rows, mutate, case_when]
+  dplyr[`%>%`,
+        as_tibble,
+        bind_rows, 
+        case_when,
+        filter,
+        mutate]
 )
 
 #' @export
-f_importar <- function(){
+f_importar <- function(selecao){
   
  
   
-  dados <- #readRDS("app/data/dados.Rds") %>%
-    #bind_rows(readRDS("app/data/dados2.Rds") %>%
-    #            mutate(semestre = 2)) %>%
-    #NÂO COLOCA O DIRETORIO !!!!!!!
-    #readRDS("C:/Users/marco.costa/Servico Nacional de Aprendizagem Comercial/GerProspecAvalEducacional - 03 - Pesquisas/02. QP/2024/6. Programas/2. Pesquisa/Acompanhamento/app/data/dados.rds") %>%
-    readRDS("app/data/dados.Rds") %>% 
+  dados <- readRDS("app/data/dados.Rds") %>% 
     as_tibble() %>%
     mutate(DR2 = case_when(DR == "AC" ~ "12",
                            DR == "AL" ~ "27",
@@ -42,6 +41,7 @@ f_importar <- function(){
                            DR == "SE" ~ "28",
                            DR == "SP" ~ "35",
                            DR == "TO" ~ "17",
-                           .default = NA_character_))
+                           .default = NA_character_)) %>% 
+    filter(ead == selecao)
   return(dados)
 }

@@ -1,6 +1,5 @@
 box::use(
   shiny[moduleServer, NS, reactiveTimer, reactive, icon],
-  dplyr[bind_rows, `%>%`, mutate, as_tibble, case_when]
 )
 
 box::use(
@@ -8,13 +7,13 @@ box::use(
 )
 
 #' @export
-server <- function(id) {
+server <- function(id, selecao) {
   moduleServer(id, function(input, output, session) {
     
     
     dados <- reactive({
-      
-      saida <- f_importar()
+      x <- selecao()
+      saida <- f_importar(x)
       
       return(saida)
       

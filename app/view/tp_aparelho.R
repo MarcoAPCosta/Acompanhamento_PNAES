@@ -27,7 +27,6 @@ server <- function(id, dados, filtro) {
     
     
     output$grafico_dr_1 <- renderEcharts4r({
-      print(filtro())
       if(length(filtro()) < 1){
         linha <- "."
         check <- F
@@ -94,7 +93,6 @@ server <- function(id, dados, filtro) {
         }"),
                  position = "outside",
                  fontSize = 16) %>%
-        e_theme_custom('{"color":["#B7B6CD", "#7D7CB0", "#444294"]}') %>%
         e_legend(orient = 'vertical',
                  left = "0%",
                  top = "middle",
