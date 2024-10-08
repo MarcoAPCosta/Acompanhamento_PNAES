@@ -8,11 +8,8 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   tagList(
-    selectInput(
-      ns("dr"),
-        "Escolha o departamento regional:",
-        choices = NULL
-      )
+    uiOutput(ns("asd"))
+    
     )
   
 
@@ -21,9 +18,15 @@ ui <- function(id) {
 #' @export
 server <- function(id, dados) {
   moduleServer(id, function(input, output, session) {
-    observe({
+
+    output$asd <- renderUI({
       opcoes <-  dados()$DR %>% unique() %>% sort()
-      updateSelectInput(session, "dr", choices = c("BR", opcoes))
+      
+      selectInput(
+        ns("dr"),
+        "Escolha o departamento regional:",
+        choices =  choices = c("BR", opcoes)
+      )
     })
     
     saida <- reactive({
