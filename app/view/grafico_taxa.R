@@ -1,9 +1,5 @@
 box::use(
-  shiny[moduleServer,
-        NS,
-        strong,
-        renderUI,
-        uiOutput],
+  shiny[...],
   bslib[card_header,card_body],
   dplyr[`%>%`,
         filter],
