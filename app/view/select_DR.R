@@ -3,6 +3,10 @@ box::use(
   dplyr[...],
 )
 
+box::use(
+  app/logic/global[opcoes]
+)
+
 
 #' @export
 ui <- function(id) {
@@ -16,20 +20,22 @@ ui <- function(id) {
 }
 
 #' @export
-server <- function(id, dados) {
+server <- function(id, dados, selecao_fora) {
   moduleServer(id, function(input, output, session) {
     
     ns <- session$ns
 
     output$asd <- renderUI({
       
-      opcoes <-  dados()$DR %>% unique() %>% sort()
-      
       selectInput(
         ns("dr"),
         "Escolha o departamento regional:",
         choices = c("BR", opcoes)
       )
+    })
+    
+    observeEvent(selecao_fora(), {
+      updateSelectInput(session, "dr", selected = selecao_fora())
     })
     
     saida <- reactive({

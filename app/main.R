@@ -20,6 +20,7 @@ ui <- function(id) {
   
   page_fluid(
     title = "Painel de Acompanhamento ANQP",
+    header$ui(ns("titulo"), "Painel de acompanhamento da ANQP - 2024"),
     navset_tab(
       id = ns("rede"),
       nav_panel(title = "Rede Presencial",
@@ -46,12 +47,10 @@ server <- function(id) {
     
     dados <- dados$server("asdas", rede_tab)
     
-    relatorio$server("presencial", dados)
+    selecao_p <- relatorio$server("presencial", dados, selecao_e)
     
-    relatorio$server("ead", dados)
-    
-    
+    selecao_e <- relatorio$server("ead", dados, selecao_p)
     
     
-  })
+    })
 }
