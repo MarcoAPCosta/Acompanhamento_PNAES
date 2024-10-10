@@ -28,31 +28,36 @@ ui <- function(id) {
   
   list(
     #ui1
-    layout_columns(
-      col_widths = c(12, 3, 3, 3, 3),
-      header$ui(ns("titulo1"), 
-                "População e cadastro"),
-      select_DR$ui(ns("selecao")),
-      
-      value_box(
-        title = "População Alvo",
-        value = textOutput(ns("popalvo")),
-        color = "grey85"
-      ),
-      value_box(
-        title = "População de Pesquisa",
-        value = textOutput(ns("poppesq"))
-      ),
-      value_box(
-        title = "Taxa de Cobertura",
-        value = textOutput(ns("taxacob"))
+    card(
+      card_header("População e cadastro"),
+      card_body(
+        layout_columns(
+          col_widths = c(3, 3, 3, 3),
+          # header$ui(ns("titulo1"), 
+          #           "População e cadastro"),
+          select_DR$ui(ns("selecao")),
+          
+          value_box(
+            title = "População Alvo",
+            value = textOutput(ns("popalvo")),
+            color = "grey85"
+          ),
+          value_box(
+            title = "População de Pesquisa",
+            value = textOutput(ns("poppesq"))
+          ),
+          value_box(
+            title = "Taxa de Cobertura",
+            value = textOutput(ns("taxacob"))
+          )
+        )
       )
     ),
     #ui2
     layout_columns(
       col_widths = c(12, 2, 6, 4),
       header$ui(ns("titulo2"),
-                "Informações do acesso ao questinário"),
+                "Informações do acesso ao questionário"),
       layout_columns(
         col_widths = c(12,12,12),
         value_box(
@@ -123,33 +128,33 @@ server <- function(id, dados, dados1, selecao_fora) {
         unique()
     })
     
-     selecao1 <- reactive({req(selecao())
-       dados_p |> 
+    selecao1 <- reactive({req(selecao())
+      dados_p |> 
         filter(DR == selecao()) |> 
-         filter(ead == ead_valor())
-     })
+        filter(ead == ead_valor())
+    })
     
-  dados1_filtrado <- reactive({req(selecao())
-    valor <- selecao()
-    if(valor == "BR"){
-      saida <- dados1() %>% 
-        summarise(across(c(pop_a, pop_p),
-                         ~sum(.x))) %>% 
-        mutate(tx = pop_p/pop_a)
+    dados1_filtrado <- reactive({req(selecao())
+      valor <- selecao()
+      if(valor == "BR"){
+        saida <- dados1() %>% 
+          summarise(across(c(pop_a, pop_p),
+                           ~sum(.x))) %>% 
+          mutate(tx = pop_p/pop_a)
       }else{
         saida <- dados1() %>%
           filter(DR == selecao())
       }
-    return(saida)
-  })
+      return(saida)
+    })
     
     
     dados123 <- reactive({req(selecao())
       valor <- selecao()
       if(valor == "BR"){
         saida <- dados()}else{
-      saida <- dados() %>%
-        filter(DR == selecao())
+          saida <- dados() %>%
+            filter(DR == selecao())
         }
       return(saida)
     })
@@ -181,7 +186,7 @@ server <- function(id, dados, dados1, selecao_fora) {
     output$medio <- renderText({
       dados123() %>% summarise(media = round(mean(tempo), 2)) %>% as.character()
     })
-
+    
     output$mediana <- renderText({
       dados123() %>% summarise(mediana = round(median(tempo), 2)) %>% as.character()
     })

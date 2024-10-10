@@ -10,14 +10,15 @@ ui <- function(id, nome) {
     class = "caixa-valores",
     tags$h2(
       id = "titulo",
-      nome,
-    ))
+      nome
+    )
+  )
 }
 
 #' @export
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
-
+    
   })
 }

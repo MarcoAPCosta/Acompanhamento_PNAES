@@ -2,7 +2,8 @@ box::use(
   shiny[moduleServer,
         NS,
         reactive],
-  bslib[page_fluid,
+  bslib[bs_theme,
+        page_fluid,
         nav_panel,
         navset_tab],
 )
@@ -20,6 +21,7 @@ ui <- function(id) {
   ns <- NS(id)
   
   page_fluid(
+    theme = bs_theme(bootswatch = "minty"),
     title = "Painel de Acompanhamento ANQP",
     header$ui(ns("titulo"), "Painel de acompanhamento da ANQP - 2024"),
     navset_tab(

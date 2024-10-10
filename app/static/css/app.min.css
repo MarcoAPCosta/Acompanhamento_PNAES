@@ -1,0 +1,16 @@
+body {
+      background: #002a54 !important;
+}
+
+h2#titulo{
+    font-size: xxx-large;
+    text-align: left;
+    background: url('static/images/header.svg');
+    color: white;
+    height: 150px;
+    position: relative;
+    align-content: center;
+    background-position: center right;
+    background-size: 100%;
+  
+}
