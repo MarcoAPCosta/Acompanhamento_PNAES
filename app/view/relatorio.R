@@ -129,10 +129,14 @@ server <- function(id, dados, dados1, selecao_fora) {
          filter(ead == ead_valor())
      })
     
-  dados1_filtrado <- reactive({
+  dados1_filtrado <- reactive({req(selecao())
     valor <- selecao()
     if(valor == "BR"){
-      saida <- dados1()}else{
+      saida <- dados1() %>% 
+        summarise(across(c(pop_a, pop_p),
+                         ~sum(.x))) %>% 
+        mutate(tx = pop_p/pop_a)
+      }else{
         saida <- dados1() %>%
           filter(DR == selecao())
       }
