@@ -11,6 +11,7 @@ box::use(
   app/view/relatorio,
   app/view/dados,
   app/view/header,
+  app/view/dados1,
 )
 
 
@@ -47,9 +48,11 @@ server <- function(id) {
     
     dados <- dados$server("asdas", rede_tab)
     
-    selecao_p <- relatorio$server("presencial", dados, selecao_e)
+    dados1 <- dados1$server("asdasd", rede_tab)
     
-    selecao_e <- relatorio$server("ead", dados, selecao_p)
+    selecao_p <- relatorio$server("presencial", dados, dados1, selecao_e)
+    
+    selecao_e <- relatorio$server("ead", dados, dados1, selecao_p)
     
     
     })
