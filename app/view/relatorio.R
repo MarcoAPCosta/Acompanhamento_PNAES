@@ -1,10 +1,12 @@
 box::use(
-  shiny[bootstrapPage, div, moduleServer, NS, renderUI, tags, uiOutput,selectInput, observeEvent],
+  shiny[...],
+  dplyr[...],
   bslib[card,
         card_body,
         card_header,
         layout_columns,
-        value_box]
+        value_box],
+  stats[median],
 )
 
 box::use(
@@ -17,7 +19,7 @@ box::use(
 )
 
 box::use(
-  app/logic/global[brasil]
+  app/logic/global[brasil, dados_p, pop1]
 )
 
 #' @export
@@ -27,90 +29,126 @@ ui <- function(id) {
   list(
     #ui1
     layout_columns(
-    col_widths = c(12, 3, 3, 3, 3),
-    header$ui(ns("titulo1"), 
-              "População e cadastro"),
-    select_DR$ui(ns("selecao")),
-    
-    value_box(
-      title = "População Alvo",
-      value = 1
-    ),
-    value_box(
-      title = "População de Pesquisa",
-      value = 14
-    ),
-    value_box(
-      title = "Taxa de Colaboradores",
-      value = 1
-    )
-  ),
-  #ui2
-  layout_columns(
-    col_widths = c(12, 2, 6, 4),
-    header$ui(ns("titulo2"),
-              "Informações do acesso ao questinário"),
-    layout_columns(
-      col_widths = c(12,12,12),
-    value_box(
-      title = "Total de Acessos",
-      value = 123
-    ),
-    value_box(
-      title = "Tempo médio de resposta",
-      value = 123
-    ),
-    value_box(
-      title = "Tempo mediano de resposta",
-      value = 123
-    )
-    ),
-    card(
-      full_screen = TRUE,
-      card_header("Taxa de Acessos"),
-      card_body(
-        grafico_taxa$ui(ns("taxa"))
-      )
-    ),
-    
-    card(
-      full_screen = TRUE,
-      card_header("Tipo de aparelho"),
-      card_body(
-        tp_aparelho$ui(ns("tp"))
-      )
+      col_widths = c(12, 3, 3, 3, 3),
+      header$ui(ns("titulo1"), 
+                "População e cadastro"),
+      select_DR$ui(ns("selecao")),
       
-    )
-  ),
-  #ui3
-  layout_columns(
-    col_widths = c(12,6,6),
-    header$ui(ns("titulo3"),
-              "Taxa de resposta e questionário valido"),
-    card(
-      full_screen = TRUE,
-      card_header("Total de Válidos e Taxa de Resposta"),
-      card_body(
-        tabela$ui(ns("tabela"))
+      value_box(
+        title = "População Alvo",
+        value = textOutput(ns("popalvo")),
+        color = "grey85"
+      ),
+      value_box(
+        title = "População de Pesquisa",
+        value = textOutput(ns("poppesq"))
+      ),
+      value_box(
+        title = "Taxa de Cobertura",
+        value = textOutput(ns("taxacob"))
       )
     ),
-    card(
-      full_screen = TRUE,
-      card_header("Mapa"),
-      card_body(
-        mapa$ui(ns("mapa"))
+    #ui2
+    layout_columns(
+      col_widths = c(12, 2, 6, 4),
+      header$ui(ns("titulo2"),
+                "Informações do acesso ao questinário"),
+      layout_columns(
+        col_widths = c(12,12,12),
+        value_box(
+          title = "Total de Acessos",
+          value = textOutput(ns("acessos"))
+        ),
+        value_box(
+          title = "Tempo médio de resposta",
+          value = textOutput(ns("medio"))
+        ),
+        value_box(
+          title = "Tempo mediano de resposta",
+          value = textOutput(ns("mediana"))
+        )
+      ),
+      card(
+        full_screen = TRUE,
+        card_header("Taxa de Acessos"),
+        card_body(
+          grafico_taxa$ui(ns("taxa"))
+        )
+      ),
+      
+      card(
+        full_screen = TRUE,
+        card_header("Tipo de aparelho"),
+        card_body(
+          tp_aparelho$ui(ns("tp"))
+        )
+        
+      )
+    ),
+    #ui3
+    layout_columns(
+      col_widths = c(12,6,6),
+      header$ui(ns("titulo3"),
+                "Taxa de resposta e questionário valido"),
+      card(
+        full_screen = TRUE,
+        card_header("Total de Válidos e Taxa de Resposta"),
+        card_body(
+          tabela$ui(ns("tabela"))
+        )
+      ),
+      card(
+        full_screen = TRUE,
+        card_header("Mapa"),
+        card_body(
+          mapa$ui(ns("mapa"))
+        )
       )
     )
-  )
   )
   
 }
 
 #' @export
-server <- function(id, dados, selecao_fora) {
+server <- function(id, dados, dados1, selecao_fora) {
   moduleServer(id, function(input, output, session) {
     
     selecao <- select_DR$server("selecao", dados, selecao_fora)
+    
+    
+    
+    ead_valor <- reactive({
+      dados() %>%
+        pull(ead) %>% 
+        unique()
+    })
+    
+     selecao1 <- reactive({req(selecao())
+       dados_p |> 
+        filter(DR == selecao()) |> 
+         filter(ead == ead_valor())
+     })
+    
+  dados1_filtrado <- reactive({
+    valor <- selecao()
+    if(valor == "BR"){
+      saida <- dados1()}else{
+        saida <- dados1() %>%
+          filter(DR == selecao())
+      }
+    return(saida)
+  })
+    
+    
+    dados123 <- reactive({req(selecao())
+      valor <- selecao()
+      if(valor == "BR"){
+        saida <- dados()}else{
+      saida <- dados() %>%
+        filter(DR == selecao())
+        }
+      return(saida)
+    })
     
     grafico_taxa$server("taxa", dados)
     
@@ -120,7 +158,29 @@ server <- function(id, dados, selecao_fora) {
     
     tabela$server("tabela", dados)
     
+    output$popalvo <- renderText({
+      dados1_filtrado()$pop_a
+    })
     
+    output$poppesq <- renderText({
+      dados1_filtrado()$pop_p
+    })
+    
+    output$taxacob <- renderText({
+      dados1_filtrado()$tx
+    })
+    
+    output$acessos <- renderText({
+      dados123() %>% count() %>% pull(n) |> as.character()
+    })
+    
+    output$medio <- renderText({
+      dados123() %>% summarise(media = round(mean(tempo), 2)) %>% as.character()
+    })
+
+    output$mediana <- renderText({
+      dados123() %>% summarise(mediana = round(median(tempo), 2)) %>% as.character()
+    })
     
     return(selecao)
     
