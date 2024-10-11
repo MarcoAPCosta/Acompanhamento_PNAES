@@ -10,7 +10,12 @@ ui <- function(id, nome) {
     class = "caixa-valores",
     tags$h2(
       id = "titulo",
-      nome
+      nome,
+      style = "
+    background: url('static/images/header.svg');
+    background-position: center right;
+    background-size: 100%;
+      "
     )
   )
 }

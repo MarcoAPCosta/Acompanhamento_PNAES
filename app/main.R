@@ -21,7 +21,7 @@ ui <- function(id) {
   ns <- NS(id)
   
   page_fluid(
-    theme = bs_theme(bootswatch = "minty"),
+    #theme = bs_theme(bootswatch = "shiny"),
     title = "Painel de Acompanhamento ANQP",
     header$ui(ns("titulo"), "Painel de acompanhamento da ANQP - 2024"),
     navset_tab(

@@ -3,10 +3,7 @@ box::use(
   bslib[card_header,card_body],
   dplyr[tibble, `%>%`, count, n, summarise,
         group_by, mutate, filter, case_when],
-  echarts4r[e_charts,e_pie,e_title,
-            e_brush, e_tooltip,
-            echarts4rOutput, renderEcharts4r,
-            e_theme_custom, e_legend, e_labels],
+  echarts4r[...],
   stringr[str_detect],
   htmlwidgets[JS]
   
@@ -83,6 +80,9 @@ server <- function(id, dados, filtro) {
               labelLine = list(show = TRUE,
                                shadowColor = 'rgba(0, 0, 0, 100)',
                                shadowBlur = 2)) %>%
+        e_color(c("#002a54",
+                  "#ffa32a",
+                  "#8aa8ff")) %>% 
         e_tooltip(valueFormatter = JS("function(value) {
           saida = value.toString().replace(',', '.');
           return saida

@@ -75,7 +75,7 @@ server <- function(id, brasil, dados) {
         }))
       
       cores <- colorFactor(
-        c("#E5E5E5", "#BCBCD0", "#9493BC", "#6C6AA8", "#444294"),
+        c("#002A54", "#7F663F", "#FFA32A", "#C4A594", "#8AA8FF"),
         domain = brasil$Tx,
         levels = levels(brasil$Tx),
         na.color = "red"

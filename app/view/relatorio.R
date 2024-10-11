@@ -19,7 +19,8 @@ box::use(
 )
 
 box::use(
-  app/logic/global[brasil, dados_p, pop1]
+  app/logic/global[brasil, dados_p, pop1],
+  app/logic/funcoes_auxiliares[formatar_numero]
 )
 
 #' @export
@@ -168,27 +169,33 @@ server <- function(id, dados, dados1, selecao_fora) {
     tabela$server("tabela", dados)
     
     output$popalvo <- renderText({
-      dados1_filtrado()$pop_a
+      dados1_filtrado()$pop_a[1] %>% formatar_numero
     })
     
     output$poppesq <- renderText({
-      dados1_filtrado()$pop_p
+      dados1_filtrado()$pop_p[1] %>% formatar_numero
     })
     
     output$taxacob <- renderText({
-      dados1_filtrado()$tx
+      dados1_filtrado()$tx[1] %>% formatar_numero
     })
     
     output$acessos <- renderText({
-      dados123() %>% count() %>% pull(n) |> as.character()
+      dados123() %>% count() %>% pull(n) %>% formatar_numero
     })
     
     output$medio <- renderText({
-      dados123() %>% summarise(media = round(mean(tempo), 2)) %>% as.character()
+      dados123() %>%
+        summarise(media = round(mean(tempo), 2)) %>% 
+        pull(media) %>%
+        formatar_numero
     })
     
     output$mediana <- renderText({
-      dados123() %>% summarise(mediana = round(median(tempo), 2)) %>% as.character()
+      dados123() %>% 
+        summarise(mediana = round(median(tempo), 2)) %>%
+        pull(mediana) %>%
+        formatar_numero
     })
     
     return(selecao)
