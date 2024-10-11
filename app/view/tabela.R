@@ -48,11 +48,12 @@ server <- function(id, dados) {
                   
       
       reactable(dados_t,
-                defaultPageSize = 16,
-                filterable = TRUE,
+                pagination = FALSE,
+                filterable = FALSE,
                 highlight = TRUE,
                 bordered = TRUE,
                 striped = TRUE,
+                height = 750,
                 columns = list(
                   ead = colDef(
                     show = FALSE
