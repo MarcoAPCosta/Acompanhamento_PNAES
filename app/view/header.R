@@ -1,9 +1,10 @@
 box::use(
-  shiny[moduleServer, NS, tags]
+  shiny[moduleServer, NS, tags],
+  glue[glue]
 )
 
 #' @export
-ui <- function(id, nome) {
+ui <- function(id, nome, tamanho = "xx-large") {
   ns <- NS(id)
   
   tags$div(
@@ -11,11 +12,12 @@ ui <- function(id, nome) {
     tags$h2(
       id = "titulo",
       nome,
-      style = "
+      style = glue("
     background: url('static/images/header.svg');
     background-position: center right;
     background-size: 100%;
-      "
+    font-size:{tamanho}
+      ")
     )
   )
 }

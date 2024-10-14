@@ -23,7 +23,9 @@ ui <- function(id) {
   page_fluid(
     #theme = bs_theme(bootswatch = "shiny"),
     title = "Painel de Acompanhamento ANQP",
-    header$ui(ns("titulo"), "Painel de acompanhamento da ANQP - 2024"),
+    header$ui(ns("titulo"), 
+              "Painel de acompanhamento da ANQP - 2024",
+              "xxx-large"),
     navset_tab(
       id = ns("rede"),
       nav_panel(title = "Rede Presencial",

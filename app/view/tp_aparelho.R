@@ -80,8 +80,8 @@ server <- function(id, dados, filtro) {
               labelLine = list(show = TRUE,
                                shadowColor = 'rgba(0, 0, 0, 100)',
                                shadowBlur = 2)) %>%
-        e_color(c("#002a54",
-                  "#ffa32a",
+        e_color(c("#ffa32a",
+                  "#002a54",
                   "#8aa8ff")) %>% 
         e_tooltip(valueFormatter = JS("function(value) {
           saida = value.toString().replace(',', '.');

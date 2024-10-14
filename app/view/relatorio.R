@@ -169,15 +169,15 @@ server <- function(id, dados, dados1, selecao_fora) {
     tabela$server("tabela", dados)
     
     output$popalvo <- renderText({
-      dados1_filtrado()$pop_a[1] %>% formatar_numero
+      dados1_filtrado()$pop_a[1] %>% formatar_numero(ndigitos = 0)
     })
     
     output$poppesq <- renderText({
-      dados1_filtrado()$pop_p[1] %>% formatar_numero
+      dados1_filtrado()$pop_p[1] %>% formatar_numero(ndigitos = 0)
     })
     
     output$taxacob <- renderText({
-      dados1_filtrado()$tx[1] %>% formatar_numero
+      dados1_filtrado()$tx[1] %>% formatar_numero(percent = T)
     })
     
     output$acessos <- renderText({
@@ -188,14 +188,16 @@ server <- function(id, dados, dados1, selecao_fora) {
       dados123() %>%
         summarise(media = round(mean(tempo), 2)) %>% 
         pull(media) %>%
-        formatar_numero
+        formatar_numero() %>% 
+        paste("Mins")
     })
     
     output$mediana <- renderText({
       dados123() %>% 
         summarise(mediana = round(median(tempo), 2)) %>%
         pull(mediana) %>%
-        formatar_numero
+        formatar_numero %>% 
+        paste("Mins")
     })
     
     return(selecao)
