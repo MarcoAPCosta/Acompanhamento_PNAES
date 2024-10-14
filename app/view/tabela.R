@@ -43,7 +43,7 @@ server <- function(id, dados) {
         filter(DR != "SG") %>%
         summarise(Validos = sum(valido == "valido"),
                   Total = n(),
-                  Taxa = round((Validos/Total)*100, digits = 1))
+                  Taxa = (Validos/Total))
      
                   
       
@@ -54,6 +54,8 @@ server <- function(id, dados) {
                 bordered = TRUE,
                 striped = TRUE,
                 height = 750,
+                defaultColDef = colDef(format = colFormat(separators = TRUE,
+                                                          locales = "pt-BR")),
                 columns = list(
                   ead = colDef(
                     show = FALSE
@@ -68,7 +70,10 @@ server <- function(id, dados) {
                   ),
                   Taxa = colDef(
                     filterable = FALSE,
-                    align = "right"
+                    align = "right",
+                    format = colFormat(separators = TRUE,
+                                       percent = TRUE,
+                                       digits = 1)
                   )
                 )
                 
