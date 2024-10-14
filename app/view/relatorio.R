@@ -29,104 +29,140 @@ ui <- function(id) {
   
   list(
     #ui1
-    card(
+    card(style = "margin-top: 20px",
       card_header("População e cadastro",
-                  style = "font-size: 24px; text-align: center;
-                  background-color: #ffa32a; color: white;
-                  border-color: #ffffff"),
-      card_body(style = "background-color: #002a54; color: white;",
-        layout_columns(
-          col_widths = c(3, 3, 3, 3),
-          # header$ui(ns("titulo1"), 
-          #           "População e cadastro"),
-          select_DR$ui(ns("selecao")),
-          
-          value_box(style = "background-color: #8aa8ff; color: white;
-                    text-align: center",
-            title = "População Alvo:",
-            value = textOutput(ns("popalvo"))
-          ),
-          value_box(style = "background-color: #8aa8ff; color: white;
-                    text-align: center",
-            title = "População de Pesquisa:",
-            value = textOutput(ns("poppesq"))
-          ),
-          value_box(style = "background-color: #8aa8ff; color: white;
-                    text-align: center",
-            title = "Taxa de Cobertura:",
-            value = textOutput(ns("taxacob"))
-          )
-        )
+                  style = "font-size: 24px;
+                  text-align: center;
+                  background-color: #ffa32a;
+                  color: white;
+                  "),
+      card_body(style = "background-color: #002a54;
+                         color: white;",
+                layout_columns(
+                  col_widths = c(3, 3, 3, 3),
+                  select_DR$ui(ns("selecao")),
+                  
+                  value_box(style = "background-color: #8aa8ff;
+                             color: white;
+                             text-align: center",
+                            title = "População Alvo:",
+                            value = textOutput(ns("popalvo"))
+                  ),
+                  value_box(style = "background-color: #8aa8ff;
+                             color: white;
+                             text-align: center",
+                            title = "População de Pesquisa:",
+                            value = textOutput(ns("poppesq"))
+                  ),
+                  value_box(style = "background-color: #8aa8ff;
+                             color: white;
+                             text-align: center",
+                            title = "Taxa de Cobertura:",
+                            value = textOutput(ns("taxacob"))
+                  )
+                )
       )
     ),
     hr(),
     #ui2
-    layout_columns(
-      col_widths = c(12, 2, 6, 4),
-      header$ui(ns("titulo2"),
-                "Informações do acesso ao questionário"),
-      layout_columns(
-        col_widths = c(12,12,12),
-        value_box(style = "background-color: #8aa8ff; color: white",
-          title = "Total de Acessos:",
-          value = textOutput(ns("acessos"))
-        ),
-        value_box(style = "background-color: #8aa8ff; color: white",
-          title = "Tempo médio de resposta:",
-          value = textOutput(ns("medio"))
-        ),
-        value_box(style = "background-color: #8aa8ff; color: white",
-          title = "Tempo mediano de resposta:",
-          value = textOutput(ns("mediana"))
-        )
-      ),
-      card(
-        full_screen = TRUE,
-        card_header("Taxa de Acessos",
-                    style = "font-size: 24px; text-align: center;
-                  background-color: #ffa32a; color: white;
-                    border-color: #ffffff"),
-        card_body(
-          grafico_taxa$ui(ns("taxa"))
-        )
-      ),
-      
-      card(
-        full_screen = TRUE,
-        card_header("Tipo de aparelho",
-                    style = "font-size: 24px; text-align: center;
-                  background-color: #ffa32a; color: white;
-                    border-color: #ffffff"),
-        card_body(
-          tp_aparelho$ui(ns("tp"))
-        )
-        
+    card(
+      card_header("Informações do acesso ao questionário",
+                  style = "font-size: 24px;
+                  text-align: center;
+                  background-color: #ffa32a;
+                  color: white;
+                  "),
+      card_body(style = "background-color: #002a54;
+                         color: white;",
+                layout_columns(
+                  col_widths = c(2, 6, 4),
+                  # header$ui(ns("titulo2"),
+                  #           "Informações do acesso ao questionário"),
+                  layout_columns(
+                    col_widths = c(12,12,12),
+                    value_box(style = "background-color: #8aa8ff;
+                           color: white",
+                              title = "Total de Acessos:",
+                              value = textOutput(ns("acessos"))
+                    ),
+                    value_box(style = "background-color: #8aa8ff;
+                           color: white",
+                              title = "Tempo médio de resposta:",
+                              value = textOutput(ns("medio"))
+                    ),
+                    value_box(style = "background-color: #8aa8ff;
+                           color: white",
+                              title = "Tempo mediano de resposta:",
+                              value = textOutput(ns("mediana"))
+                    )
+                  ),
+                  card(
+                    full_screen = TRUE,
+                    card_header("Total de acessos por dia, ANQP 2024 ",
+                                style = "font-size: 24px;
+                             text-align: center;
+                             background-color: #ffa32a;
+                             color: white;"),
+                    card_body(
+                      grafico_taxa$ui(ns("taxa"))
+                    )
+                  ),
+                  
+                  card(
+                    full_screen = TRUE,
+                    card_header("Distribuição dos válidos, por tipo de aparelho utilizado, ANQP 2024",
+                                style = "font-size: 24px;
+                             text-align: center;
+                             background-color: #ffa32a;
+                             color: white;"),
+                    card_body(
+                      tp_aparelho$ui(ns("tp"))
+                    )
+                    
+                  )
+                )
       )
     ),
+    hr(),
     #ui3
-    layout_columns(
-      col_widths = c(12,6,6),
-      header$ui(ns("titulo3"),
-                "Taxa de resposta e questionário valido"),
-      card(
-        full_screen = TRUE,
-        card_header("Válidos",
-        style = "font-size: 24px; text-align: center;
-                  background-color: #ffa32a; color: white;
-                    border-color: #ffffff"),
-        card_body(
-          tabela$ui(ns("tabela"))
-        )
-      ),
-      card(
-        full_screen = TRUE,
-        card_header("Mapa",
-                    style = "font-size: 24px; text-align: center;
-                  background-color: #ffa32a; color: white;
-                    border-color: #ffffff"),
-        card_body(style = "background-color: 	#dddddd;",
-          mapa$ui(ns("mapa"))
-        )
+    card(
+      card_header("Taxa de resposta e questionário valido",
+                  style = "font-size: 24px;
+                  text-align: center;
+                  background-color: #ffa32a;
+                  color: white;
+                  "),
+      card_body(style = "background-color: #002a54;
+                         color: white;",
+                layout_columns(
+                  col_widths = c(6,6),
+                  # header$ui(ns("titulo3"),
+                  #           "Taxa de resposta e questionário valido"),
+                  card(
+                    full_screen = TRUE,
+                    card_header("Válidos",
+                                style = "font-size: 24px; 
+                 text-align: center;
+                 background-color: #ffa32a;
+                 color: white;
+                 "),
+                    card_body(
+                      tabela$ui(ns("tabela"))
+                    )
+                  ),
+                  card(
+                    full_screen = TRUE,
+                    card_header("Mapa",
+                                style = "font-size: 24px;
+                             text-align: center;
+                             background-color: #ffa32a;
+                             color: white;
+                             "),
+                    card_body(style = "background-color: 	#dddddd;",
+                              mapa$ui(ns("mapa"))
+                    )
+                  )
+                )
       )
     )
   )

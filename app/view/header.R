@@ -13,11 +13,13 @@ ui <- function(id, nome, tamanho = "xx-large") {
       id = "titulo",
       nome,
       style = glue("
-    background: url('static/images/header.svg');
-    background-position: center right;
-    background-size: 100%;
-    font-size:{tamanho}
-      ")
+          margin-top: 25px;
+          padding-left: 25px;
+          background: url(static/images/header.svg);
+          background-position: right;
+          background-repeat: no-repeat;
+          background-size: 30%;
+          font-size:{tamanho}")
     )
   )
 }
