@@ -78,11 +78,13 @@ server <- function(id, dados, filtro) {
               center = c("65%", "50%"),
               itemStyle = list(borderColor = "rgba(0, 0, 0, 0.30)"),
               labelLine = list(show = TRUE,
+                               length = 5,
+                               length2 = 5,
                                shadowColor = 'rgba(0, 0, 0, 100)',
                                shadowBlur = 2)) %>%
-        e_color(c("#ffa32a",
-                  "#002a54",
-                  "#8aa8ff")) %>% 
+        e_color(c("#002a54",
+                  "#8aa8ff",
+                  "#ffa32a")) %>% 
         e_tooltip(valueFormatter = JS("function(value) {
           saida = value.toString().replace(',', '.');
           return saida

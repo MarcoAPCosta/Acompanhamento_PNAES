@@ -91,8 +91,8 @@ server <- function(id, brasil, dados) {
         ) %>%
         addPolygons(
           stroke = TRUE,
-          color = "black",
-          weight = 1,
+          color = "white",
+          weight = 0.5,
           fill = TRUE,
           fillColor = ~ cores(Tx),
           fillOpacity = 1,

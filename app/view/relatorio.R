@@ -30,30 +30,36 @@ ui <- function(id) {
   list(
     #ui1
     card(
-      card_header("População e cadastro"),
-      card_body(
+      card_header("População e cadastro",
+                  style = "font-size: 24px; text-align: center;
+                  background-color: #ffa32a; color: white;
+                  border-color: #ffffff"),
+      card_body(style = "background-color: #002a54; color: white;",
         layout_columns(
           col_widths = c(3, 3, 3, 3),
           # header$ui(ns("titulo1"), 
           #           "População e cadastro"),
           select_DR$ui(ns("selecao")),
           
-          value_box(
-            title = "População Alvo",
-            value = textOutput(ns("popalvo")),
-            color = "grey85"
+          value_box(style = "background-color: #8aa8ff; color: white;
+                    text-align: center",
+            title = "População Alvo:",
+            value = textOutput(ns("popalvo"))
           ),
-          value_box(
-            title = "População de Pesquisa",
+          value_box(style = "background-color: #8aa8ff; color: white;
+                    text-align: center",
+            title = "População de Pesquisa:",
             value = textOutput(ns("poppesq"))
           ),
-          value_box(
-            title = "Taxa de Cobertura",
+          value_box(style = "background-color: #8aa8ff; color: white;
+                    text-align: center",
+            title = "Taxa de Cobertura:",
             value = textOutput(ns("taxacob"))
           )
         )
       )
     ),
+    hr(),
     #ui2
     layout_columns(
       col_widths = c(12, 2, 6, 4),
@@ -61,22 +67,25 @@ ui <- function(id) {
                 "Informações do acesso ao questionário"),
       layout_columns(
         col_widths = c(12,12,12),
-        value_box(
-          title = "Total de Acessos",
+        value_box(style = "background-color: #8aa8ff; color: white",
+          title = "Total de Acessos:",
           value = textOutput(ns("acessos"))
         ),
-        value_box(
-          title = "Tempo médio de resposta",
+        value_box(style = "background-color: #8aa8ff; color: white",
+          title = "Tempo médio de resposta:",
           value = textOutput(ns("medio"))
         ),
-        value_box(
-          title = "Tempo mediano de resposta",
+        value_box(style = "background-color: #8aa8ff; color: white",
+          title = "Tempo mediano de resposta:",
           value = textOutput(ns("mediana"))
         )
       ),
       card(
         full_screen = TRUE,
-        card_header("Taxa de Acessos"),
+        card_header("Taxa de Acessos",
+                    style = "font-size: 24px; text-align: center;
+                  background-color: #ffa32a; color: white;
+                    border-color: #ffffff"),
         card_body(
           grafico_taxa$ui(ns("taxa"))
         )
@@ -84,7 +93,10 @@ ui <- function(id) {
       
       card(
         full_screen = TRUE,
-        card_header("Tipo de aparelho"),
+        card_header("Tipo de aparelho",
+                    style = "font-size: 24px; text-align: center;
+                  background-color: #ffa32a; color: white;
+                    border-color: #ffffff"),
         card_body(
           tp_aparelho$ui(ns("tp"))
         )
@@ -98,15 +110,21 @@ ui <- function(id) {
                 "Taxa de resposta e questionário valido"),
       card(
         full_screen = TRUE,
-        card_header("Total de Válidos e Taxa de Resposta"),
+        card_header("Válidos",
+        style = "font-size: 24px; text-align: center;
+                  background-color: #ffa32a; color: white;
+                    border-color: #ffffff"),
         card_body(
           tabela$ui(ns("tabela"))
         )
       ),
       card(
         full_screen = TRUE,
-        card_header("Mapa"),
-        card_body(
+        card_header("Mapa",
+                    style = "font-size: 24px; text-align: center;
+                  background-color: #ffa32a; color: white;
+                    border-color: #ffffff"),
+        card_body(style = "background-color: 	#dddddd;",
           mapa$ui(ns("mapa"))
         )
       )
@@ -150,7 +168,7 @@ server <- function(id, dados, dados1, selecao_fora) {
     })
     
     
-    dados123 <- reactive({req(selecao())
+    dados2_filtrado <- reactive({req(selecao())
       valor <- selecao()
       if(valor == "BR"){
         saida <- dados()}else{
@@ -181,23 +199,23 @@ server <- function(id, dados, dados1, selecao_fora) {
     })
     
     output$acessos <- renderText({
-      dados123() %>% count() %>% pull(n) %>% formatar_numero
+      dados2_filtrado() %>% count() %>% pull(n) %>% formatar_numero
     })
     
     output$medio <- renderText({
-      dados123() %>%
+      dados2_filtrado() %>%
         summarise(media = round(mean(tempo), 2)) %>% 
         pull(media) %>%
         formatar_numero() %>% 
-        paste("Mins")
+        paste("mins")
     })
     
     output$mediana <- renderText({
-      dados123() %>% 
+      dados2_filtrado() %>% 
         summarise(mediana = round(median(tempo), 2)) %>%
         pull(mediana) %>%
         formatar_numero %>% 
-        paste("Mins")
+        paste("mins")
     })
     
     return(selecao)

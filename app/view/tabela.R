@@ -52,8 +52,17 @@ server <- function(id, dados) {
                 filterable = FALSE,
                 highlight = TRUE,
                 bordered = TRUE,
-                striped = TRUE,
+                striped = FALSE,
                 height = 750,
+                theme = reactableTheme(
+                  highlightColor = "#8aa8ff",
+                  headerStyle = list(
+                    color = "white",
+                    fontWeight = "bold",
+                    backgroundColor = "#002a54",
+                    fontSize = "18px"
+                                     )
+                ),
                 columns = list(
                   ead = colDef(
                     show = FALSE
@@ -61,14 +70,22 @@ server <- function(id, dados) {
                   Validos = colDef(
                     filterable = FALSE,
                     name = "Válidos",
-                    align = "right"
-                  ),
+                    align = "center",
+                    style = list(
+                      fontSize = "16px"
+                      
+                    )
+                                      ),
                   Total = colDef(
                     show = FALSE
                   ),
                   Taxa = colDef(
+                    name = "Taxa (%)",
                     filterable = FALSE,
-                    align = "right"
+                    align = "center",
+                    style = list(
+                      fontSize = "16px"
+                    )
                   )
                 )
                 
