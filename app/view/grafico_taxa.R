@@ -57,7 +57,7 @@ server <- function(id, dados) {
         maximumFractionDigits:0});
         return fmt.format(value);
       }')) %>%
-        e_theme_custom('{"color":["#ffa32a"]}') %>%
+        e_theme_custom('{"color":["#002a54"]}') %>%
         e_y_axis(formatter = JS('function(value) {
         var fmt = new Intl.NumberFormat("pt-BR",
         {style:"decimal",
