@@ -21,6 +21,7 @@ ui <- function(id) {
   ns <- NS(id)
   
   page_fluid(
+    
      # theme = bs_theme(bootswatch = "shiny",
      #                  primary =  "#002a54"),
     title = "Painel de Acompanhamento ANQP",

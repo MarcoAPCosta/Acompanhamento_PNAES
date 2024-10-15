@@ -1,18 +1,16 @@
 box::use(
-  shiny[moduleServer, NS, strong],
+  shiny[moduleServer, NS, strong, HTML, tags],
   bslib[card_header, card_body],
-  leaflet[
-    leaflet, addTiles, addPolygons, colorFactor, addProviderTiles,
-    addLegend, setView, renderLeaflet, providers,
-    leafletOutput, popupOptions, highlightOptions,
-    labelOptions, leafletOptions
-  ],
+  leaflet[...],
   dplyr[filter, mutate, count, left_join, select, pull, summarise, n],
   stats[quantile],
   sf[...],
   purrr[map2]
 )
 
+box::use(
+  app/logic/global[titulo_mapa]
+)
 #' @export
 ui <- function(id) {
   ns <- NS(id)
@@ -120,7 +118,15 @@ server <- function(id, brasil, dados) {
           lat = -15.209019860729843,
           lng = -52.121803250871675,
           zoom = 6
-        )
+        ) %>% 
+        addControl(tags$div(
+          tags$p("Taxa de resposta (%), por Departamento Regional, ANQP 2024", 
+             style = " color: black;
+    font-weight: bold;
+    font-size: 28px;")
+        )  ,
+                   position = "topleft",
+                   className="map-title")
     })
   })
 }

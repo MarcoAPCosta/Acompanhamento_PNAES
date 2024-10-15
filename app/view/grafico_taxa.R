@@ -66,8 +66,12 @@ server <- function(id, dados) {
         return fmt.format(value);
       }'),
                  axisLabel = list(fontSize = 14)) %>%
-        e_title(titulo, textStyle = list(fontSize = 14,
-                                         fontStyle = "italic"))
+        e_title(text = "Total de acessos por dia, ANQP 2024",
+                textStyle = list(fontSize = 18,
+                                 fontStyle = "normal"),
+                subtext = titulo, 
+                subtextStyle = list(fontSize = 14,
+                                 fontStyle = "italic"))
       
       
       return(grafico)

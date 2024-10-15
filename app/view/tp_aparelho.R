@@ -101,7 +101,10 @@ server <- function(id, dados, filtro) {
                  itemStyle = list(borderColor =  "rgba(0, 0, 0, 1)",
                                   borderWidth =  0.5),
                  selectedMode = FALSE) %>%
-        e_title(titulo)
+        e_title(text = "Distribuição dos válidos, por tipo de aparelho utilizado,\nANQP 2024",
+                #subtext = titulo,
+                textStyle = list(fontSize = 18,
+                                 fontStyle = "normal"))
     })
     
     
