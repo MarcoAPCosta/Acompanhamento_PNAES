@@ -1124,6 +1124,31 @@
       ],
       "Hash": "0e2829df8cb74a98179c886b023ffea8"
     },
+    "reactR": {
+      "Package": "reactR",
+      "Version": "0.6.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "htmltools"
+      ],
+      "Hash": "b8e3d93f508045812f47136c7c44c251"
+    },
+    "reactable": {
+      "Package": "reactable",
+      "Version": "0.4.4",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "digest",
+        "htmltools",
+        "htmlwidgets",
+        "jsonlite",
+        "reactR"
+      ],
+      "Hash": "6069eb2a6597963eae0605c1875ff14c"
+    },
     "rematch2": {
       "Package": "rematch2",
       "Version": "2.1.2",
@@ -1540,6 +1565,30 @@
         "xfun"
       ],
       "Hash": "9db859e8aabbb474293dde3097839420"
+    },
+    "treesitter": {
+      "Package": "treesitter",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "R6",
+        "cli",
+        "rlang",
+        "vctrs"
+      ],
+      "Hash": "22a579e4ac2ddd021df1791da7fd080f"
+    },
+    "treesitter.r": {
+      "Package": "treesitter.r",
+      "Version": "1.1.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "067c058dbd496c4cd696449870b11d52"
     },
     "units": {
       "Package": "units",
