@@ -41,8 +41,8 @@ server <- function(id, dados) {
       dados_t <- dados() %>%
         group_by(DR, ead) %>%
         filter(DR != "SG") %>%
-        summarise(Validos = sum(valido == "valido"),
-                  Total = n(),
+        summarise(Validos = sum(valido == "1"),
+                  Total = unique(Total),
                   Taxa = (Validos/Total))
      
                   
