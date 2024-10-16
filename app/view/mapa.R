@@ -118,15 +118,16 @@ server <- function(id, brasil, dados) {
           lat = -15.209019860729843,
           lng = -52.121803250871675,
           zoom = 6
-        ) %>% 
-        addControl(tags$div(
-          tags$p("Taxa de resposta (%), por Departamento Regional, ANQP 2024", 
-             style = " color: black;
-    font-weight: bold;
-    font-size: 28px;")
-        )  ,
-                   position = "topleft",
-                   className="map-title")
+        )
+    #  %>% 
+    #     addControl(tags$div(
+    #       tags$p("Taxa de resposta (%), por Departamento Regional, ANQP 2024", 
+    #          style = " color: black;
+    # font-weight: bold;
+    # font-size: 28px;")
+    #     )  ,
+    #                position = "topleft",
+    #                className="map-title")
     })
   })
 }

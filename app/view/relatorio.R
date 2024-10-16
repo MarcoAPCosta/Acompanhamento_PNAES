@@ -33,7 +33,7 @@ ui <- function(id) {
       card_header("População e cadastro",
                   style = "font-size: 24px;
                   text-align: center;
-                  background-color: #8aa8ff;
+                  background-color: #ffa32a;
                   color: white;
                   "),
       card_body(style = "background-color: #002a54;
@@ -42,19 +42,19 @@ ui <- function(id) {
                   col_widths = c(3, 3, 3, 3),
                   select_DR$ui(ns("selecao")),
                   
-                  value_box(style = "background-color: #ffa32a;
+                  value_box(style = "background-color: #8aa8ff;
                              color: white;
                              text-align: center",
                             title = "População Alvo:",
                             value = textOutput(ns("popalvo"))
                   ),
-                  value_box(style = "background-color: #ffa32a;
+                  value_box(style = "background-color: #8aa8ff;
                              color: white;
                              text-align: center",
                             title = "População de Pesquisa:",
                             value = textOutput(ns("poppesq"))
                   ),
-                  value_box(style = "background-color: #ffa32a;
+                  value_box(style = "background-color: #8aa8ff;
                              color: white;
                              text-align: center",
                             title = "Taxa de Cobertura:",
@@ -69,7 +69,7 @@ ui <- function(id) {
       card_header("Informações do acesso ao questionário",
                   style = "font-size: 24px;
                   text-align: center;
-                  background-color: #8aa8ff;
+                  background-color: #ffa32a;
                   color: white;
                   "),
       card_body(style = "background-color: #002a54;
@@ -80,17 +80,17 @@ ui <- function(id) {
                   #           "Informações do acesso ao questionário"),
                   layout_columns(
                     col_widths = c(12,12,12),
-                    value_box(style = "background-color: #ffa32a;
+                    value_box(style = "background-color: #8aa8ff;
                            color: white",
                               title = "Total de Acessos:",
                               value = textOutput(ns("acessos"))
                     ),
-                    value_box(style = "background-color: #ffa32a;
+                    value_box(style = "background-color: #8aa8ff;
                            color: white",
                               title = "Tempo médio de resposta:",
                               value = textOutput(ns("medio"))
                     ),
-                    value_box(style = "background-color: #ffa32a;
+                    value_box(style = "background-color: #8aa8ff;
                            color: white",
                               title = "Tempo mediano de resposta:",
                               value = textOutput(ns("mediana"))
@@ -143,7 +143,7 @@ ui <- function(id) {
                     card_header("Válidos",
                                 style = "font-size: 24px; 
                  text-align: center;
-                 background-color: #8aa8ff;
+                 background-color: #ffa32a;
                  color: white;
                  "),
                     card_body(
@@ -152,10 +152,10 @@ ui <- function(id) {
                   ),
                   card(
                     full_screen = TRUE,
-                    card_header("Mapa",
+                    card_header("Taxa de resposta (%), por Departamento Regional, ANQP 2024",
                                 style = "font-size: 24px;
                              text-align: center;
-                             background-color: #8aa8ff;
+                             background-color: #ffa32a;
                              color: white;
                              "),
                     card_body(style = "background-color: 	#dddddd;",
