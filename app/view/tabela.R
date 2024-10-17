@@ -66,6 +66,9 @@ server <- function(id, dados) {
                   ead = colDef(
                     show = FALSE
                   ),
+                  DR = colDef(
+                    name = "Departamento Regional"
+                  ),
                   Validos = colDef(
                     filterable = FALSE,
                     name = "Válidos",
@@ -79,7 +82,7 @@ server <- function(id, dados) {
                     show = FALSE
                   ),
                   Taxa = colDef(
-                    name = "Taxa (%)",
+                    name = "Taxa de resposta (%)",
                     filterable = FALSE,
                     format = colFormat(separators = TRUE,
                                        percent = TRUE,

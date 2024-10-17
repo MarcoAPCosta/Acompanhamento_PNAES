@@ -133,7 +133,7 @@ ui <- function(id) {
                   #           "Taxa de resposta e questionário valido"),
                   card(
                     full_screen = TRUE,
-                    card_header("Válidos",
+                    card_header("Quantitativo de válidos e Taxa de resposta (%), por Departamento Regional, ANQP 2024",
                                 style = "font-size: 24px; 
                  text-align: center;
                  background-color: #ffa32a;
@@ -145,7 +145,7 @@ ui <- function(id) {
                   ),
                   card(
                     full_screen = TRUE,
-                    card_header("Taxa de resposta (%), por Departamento Regional, ANQP 2024",
+                    card_header("Taxa de resposta  (%), por Departamento Regional, ANQP 2024",
                                 style = "font-size: 24px;
                              text-align: center;
                              background-color: #ffa32a;
