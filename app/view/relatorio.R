@@ -5,7 +5,9 @@ box::use(
         card_body,
         card_header,
         layout_columns,
-        value_box],
+        value_box,
+        value_box_theme],
+  bsicons[bs_icon],
   stats[median],
 )
 
@@ -34,7 +36,7 @@ ui <- function(id) {
       card_header("População e cadastro",
                   style = "font-size: 24px;
                   text-align: center;
-                  background-color: #ffa32a;
+                  background-color: #8aa8ff;
                   color: white;
                   "),
       card_body(style = "background-color: #002a54;
@@ -43,23 +45,26 @@ ui <- function(id) {
                   col_widths = c(3, 3, 3, 3),
                   select_DR$ui(ns("selecao")),
                   
-                  value_box(style = "background-color: #8aa8ff;
-                             color: white;
-                             text-align: center",
+                  value_box(
                             title = "População Alvo:",
-                            value = textOutput(ns("popalvo"))
+                            value = textOutput(ns("popalvo")),
+                            showcase = bs_icon("people-fill"),
+                            theme = value_box_theme(fg = "#000",
+                                                    bg = "#fff")
                   ),
-                  value_box(style = "background-color: #8aa8ff;
-                             color: white;
-                             text-align: center",
+                  value_box(
                             title = "População Alvo com contato:",
-                            value = textOutput(ns("poppesq"))
+                            value = textOutput(ns("poppesq")),
+                            showcase = bs_icon("person-check-fill"),
+                            theme = value_box_theme(fg = "#000",
+                                                    bg = "#fff")
                   ),
-                  value_box(style = "background-color: #8aa8ff;
-                             color: white;
-                             text-align: center",
+                  value_box(
                             title = "Taxa de Cobertura:",
-                            value = textOutput(ns("taxacob"))
+                            value = textOutput(ns("taxacob")),
+                            showcase = bs_icon("percent"),
+                            theme = value_box_theme(fg = "#000",
+                                                    bg = "#fff")
                   )
                 )
       )
@@ -70,7 +75,7 @@ ui <- function(id) {
       card_header("Informações do acesso ao questionário",
                   style = "font-size: 24px;
                   text-align: center;
-                  background-color: #ffa32a;
+                  background-color: #8aa8ff;
                   color: white;
                   "),
       card_body(style = "background-color: #002a54;
@@ -81,25 +86,22 @@ ui <- function(id) {
                   #           "Informações do acesso ao questionário"),
                   layout_columns(
                     col_widths = c(12,12,12),
-                    value_box(style = "background-color: #8aa8ff;
-                           color: white",
-                              title = "Total de Acessos:",
-                              value = textOutput(ns("acessos"))
+                    value_box(
+                      title = "Total de Acessos:",
+                      value = textOutput(ns("acessos"))
                     ),
-                    value_box(style = "background-color: #8aa8ff;
-                           color: white",
-                              title = "Tempo médio de resposta:",
-                              value = textOutput(ns("medio"))
+                    value_box(
+                      title = "Tempo médio de resposta:",
+                      value = textOutput(ns("medio"))
                     ),
-                    value_box(style = "background-color: #8aa8ff;
-                           color: white",
-                              title = "Tempo mediano de resposta:",
-                              value = textOutput(ns("mediana"))
+                    value_box(
+                      title = "Tempo mediano de resposta:",
+                      value = textOutput(ns("mediana"))
                     )
                   ),
                   card(
                     full_screen = TRUE,
-                   
+                    
                     card_body(
                       grafico_taxa$ui(ns("taxa"))
                     )
@@ -107,7 +109,7 @@ ui <- function(id) {
                   
                   card(
                     full_screen = TRUE,
-                   
+                    
                     card_body(
                       tp_aparelho$ui(ns("tp"))
                     )
@@ -119,24 +121,16 @@ ui <- function(id) {
     hr(),
     #ui3
     card(
-      # card_header("Taxa de resposta e questionário valido",
-      #             style = "font-size: 24px;
-      #             text-align: center;
-      #             background-color: #8aa8ff;
-      #             color: white;
-      #             "),
       card_body(style = "background-color: #002a54;
                          color: white;",
                 layout_columns(
                   col_widths = c(6,6),
-                  # header$ui(ns("titulo3"),
-                  #           "Taxa de resposta e questionário valido"),
                   card(
                     full_screen = TRUE,
                     card_header("Quantitativo de válidos e Taxa de resposta (%), por Departamento Regional, ANQP 2024",
                                 style = "font-size: 24px; 
                  text-align: center;
-                 background-color: #ffa32a;
+                 background-color: #8aa8ff;
                  color: white;
                  "),
                     card_body(
@@ -148,7 +142,7 @@ ui <- function(id) {
                     card_header("Taxa de resposta  (%), por Departamento Regional, ANQP 2024",
                                 style = "font-size: 24px;
                              text-align: center;
-                             background-color: #ffa32a;
+                             background-color: #8aa8ff;
                              color: white;
                              "),
                     card_body(style = "background-color: 	#dddddd;",
@@ -236,11 +230,11 @@ server <- function(id, dados, dados1, selecao_fora) {
       x <- dados2_filtrado()
       
       if(nrow(x) > 0){
-      saida <- x %>%
-        summarise(media = round(mean(tempo), 2)) %>% 
-        pull(media) %>%
-        formatar_numero() %>% 
-        paste("mins")
+        saida <- x %>%
+          summarise(media = round(mean(tempo), 2)) %>% 
+          pull(media) %>%
+          formatar_numero() %>% 
+          paste("mins")
       }
       
       if(nrow(x) == 0) saida <- "0"

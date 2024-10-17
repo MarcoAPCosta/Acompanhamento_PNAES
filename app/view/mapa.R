@@ -78,7 +78,7 @@ server <- function(id, brasil, dados) {
         }))
       
       cores <- colorFactor(
-        rev(c("#002A54", "#4c6987", "#8AA8FF", "#adc2ff", "#f3f6ff")),
+        c("#D7E8F0", "#B0C8F7", "#8AA8FF", "#4569A9", "#002A54"),
         domain = brasil$Tx,
         levels = levels(brasil$Tx),
         na.color = "red"
@@ -94,7 +94,7 @@ server <- function(id, brasil, dados) {
         ) %>%
         addPolygons(
           stroke = TRUE,
-          color = "white",
+          color = "black",
           weight = 0.5,
           fill = TRUE,
           fillColor = ~ cores(Tx),

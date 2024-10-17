@@ -97,7 +97,7 @@ server <- function(id, dados, filtro) {
           e_legend(show = FALSE) %>%
           e_color("transparent") %>%
           e_labels(position = "inside",
-                   formatter = "Região sem respostas válidas",
+                   formatter = "DR sem acessos no momento",
                    fontSize = 30,
                    color = "black") %>%
           e_x_axis(show = FALSE) %>%

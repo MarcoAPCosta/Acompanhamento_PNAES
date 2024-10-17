@@ -29,11 +29,12 @@ server <- function(id, dados) {
     
     output$tbl_dr <- renderReactable({
       trad <- data.frame(Nomes = opcoes %>% names,
-                         DR = opcoes,
+                         DR = unname(opcoes),
                          stringsAsFactors = FALSE)
       
       dados_t <- dados() %>%
-        left_join(trad, by = c("DR"), ) %>% 
+        left_join(trad, by = c("DR")) %>%
+        filter(!is.na(valido)) %>% 
         mutate(DR = Nomes,
                .keep = "unused") %>% 
         group_by(DR, ead) %>%

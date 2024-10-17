@@ -41,7 +41,6 @@ f_importar <- function(selecao){
                            DR == "SP" ~ "35",
                            DR == "TO" ~ "17",
                            .default = NA_character_)) %>%
-    filter(ead == selecao ) %>%
-    filter(!is.na(valido))
+    filter(ead == selecao )
   return(dados)
 }

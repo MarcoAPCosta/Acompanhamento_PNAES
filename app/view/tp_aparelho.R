@@ -68,7 +68,6 @@ server <- function(id, dados, filtro) {
                           .default = "Brasil")
       
       dados_aqui <- dados() %>%
-        filter(!is.na(valido)) %>%
         filter(str_detect(DR, linha)) %>%
         count(tp.aparelho, name = "Quantidade", sort = T)
       
@@ -104,7 +103,7 @@ server <- function(id, dados, filtro) {
                  itemStyle = list(borderColor =  "rgba(0, 0, 0, 1)",
                                   borderWidth =  0.5),
                  selectedMode = FALSE) %>%
-        e_title(text = "Distribuição dos válidos, por tipo de aparelho utilizado,\nANQP 2024",
+        e_title(text = "Distribuição dos acessos, por tipo de aparelho utilizado,\nANQP 2024",
                 #subtext = titulo,
                 textStyle = list(fontSize = 18,
                                  fontStyle = "normal")) %>% 
@@ -124,7 +123,7 @@ server <- function(id, dados, filtro) {
           e_legend(show = FALSE) %>%
           e_color("transparent") %>%
           e_labels(position = "inside",
-                   formatter = "Região sem respostas válidas",
+                   formatter = "DR sem acessos no momento",
                    fontSize = 30,
                    color = "black") %>%
           e_x_axis(show = FALSE) %>%
