@@ -79,7 +79,8 @@ server <- function(id, dados) {
                     )
                                       ),
                   Total = colDef(
-                    show = FALSE
+                    name = "Total",
+                    align = "center"
                   ),
                   Taxa = colDef(
                     name = "Taxa de resposta (%)",
