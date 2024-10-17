@@ -52,7 +52,7 @@ ui <- function(id) {
                   value_box(style = "background-color: #8aa8ff;
                              color: white;
                              text-align: center",
-                            title = "População de Pesquisa:",
+                            title = "População Alvo com contato:",
                             value = textOutput(ns("poppesq"))
                   ),
                   value_box(style = "background-color: #8aa8ff;

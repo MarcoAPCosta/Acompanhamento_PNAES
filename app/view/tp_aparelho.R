@@ -77,8 +77,8 @@ server <- function(id, dados, filtro) {
       grafico <- dados_aqui %>%
         e_charts(tp.aparelho) %>%
         e_pie(Quantidade,
-              percentPrecision = 1,
-              center = c("50%", "50%"),
+              percentPrecision = 2,
+              center = c("65%", "50%"),
               itemStyle = list(borderColor = "rgba(0, 0, 0, 0.30)"),
               labelLine = list(show = TRUE,
                                length = 5,
@@ -93,7 +93,7 @@ server <- function(id, dados, filtro) {
           return saida
         }")) %>%
         e_labels(formatter = JS("function(params) {
-          saida = params.percent.toString().replace('.', ',');
+          saida = params.percent.toFixed(2).toString().replace('.', ',');
           return saida + '%'
         }"),
                  position = "outside",
