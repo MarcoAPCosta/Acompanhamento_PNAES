@@ -29,7 +29,8 @@ ui <- function(id) {
   
   list(
     #ui1
-    card(style = "margin-top: 20px",
+    card(
+      style = "margin-top: 20px",
       card_header("População e cadastro",
                   style = "font-size: 24px;
                   text-align: center;
@@ -98,11 +99,6 @@ ui <- function(id) {
                   ),
                   card(
                     full_screen = TRUE,
-                    # card_header("Total de acessos por dia, ANQP 2024 ",
-                    #             style = "font-size: 24px;
-                    #          text-align: center;
-                    #          background-color: #8aa8ff;
-                    #          color: white;"),
                     card_body(
                       grafico_taxa$ui(ns("taxa"))
                     )
@@ -110,11 +106,6 @@ ui <- function(id) {
                   
                   card(
                     full_screen = TRUE,
-                    # card_header("Distribuição dos válidos, por tipo de aparelho utilizado, ANQP 2024",
-                    #             style = "font-size: 24px;
-                    #          text-align: center;
-                    #          background-color: #8aa8ff;
-                    #          color: white;"),
                     card_body(
                       tp_aparelho$ui(ns("tp"))
                     )
@@ -214,7 +205,7 @@ server <- function(id, dados, dados1, selecao_fora) {
       return(saida)
     })
     
-    grafico_taxa$server("taxa", dados)
+    grafico_taxa$server("taxa", dados, selecao)
     
     tp_aparelho$server("tp", dados, selecao)
     

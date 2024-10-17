@@ -13,7 +13,8 @@ box::use(
             e_y_axis,
             e_title],
   htmlwidgets[JS],
-  glue[glue]
+  glue[glue],
+  stringr[str_detect]
   
 )
 
@@ -32,13 +33,27 @@ ui <- function(id) {
 }
 
 #' @export
-server <- function(id, dados) {
+server <- function(id, dados, filtro) {
   moduleServer(id, function(input, output, session) {
     
     output$chart_tempo_1 <- renderEcharts4r({
       
-      dados_aqui <- dados() %>%
-        dplyr::filter(dt.conclusao  >= "2024-04-10 00:00:00")
+      if(length(filtro()) < 1){
+        linha <- "."
+        check <- F
+      } else {
+        if(filtro() == "BR"){
+          linha <- "."
+          check <- F
+        }else{
+          linha <- filtro()
+          check <- T
+        }
+      }
+      
+      
+      dados_aqui <-   dados() %>%
+        filter(str_detect(DR, linha))
       
       titulo <- transformar_titulo(dados_aqui) %>% round()
       titulo <- paste0("Média de acessos por dia: ", titulo)
