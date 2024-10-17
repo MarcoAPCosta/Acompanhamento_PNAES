@@ -2,25 +2,15 @@ box::use(
   shiny[moduleServer, NS, reactive, req, strong, span, em, HTML, br, tags],
   bslib[card_header, card_body,
         tooltip],
-  dplyr[`%>%`,
-        filter,
-        pull,
-        slice,
-        summarise,
-        group_by,
-        n,
-        ungroup,
-        mutate,
-        bind_rows],
+  dplyr[...],
   tidyr[starts_with],
  reactable[...],
 )
 
 
-
-
-
-
+box::use(
+  app/logic/global[opcoes]
+)
 
 
 #' @export
@@ -38,7 +28,14 @@ server <- function(id, dados) {
   moduleServer(id, function(input, output, session) {
     
     output$tbl_dr <- renderReactable({
+      trad <- data.frame(Nomes = opcoes %>% names,
+                         DR = opcoes,
+                         stringsAsFactors = FALSE)
+      
       dados_t <- dados() %>%
+        left_join(trad, by = c("DR"), ) %>% 
+        mutate(DR = Nomes,
+               .keep = "unused") %>% 
         group_by(DR, ead) %>%
         filter(DR != "SG") %>%
         summarise(Validos = sum(valido == "1"),

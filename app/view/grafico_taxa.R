@@ -3,15 +3,7 @@ box::use(
   bslib[card_header,card_body],
   dplyr[`%>%`,
         filter],
-  echarts4r[e_chart,
-            e_bar,
-            e_legend,
-            e_tooltip,
-            echarts4rOutput,
-            renderEcharts4r,
-            e_theme_custom,
-            e_y_axis,
-            e_title],
+  echarts4r[...],
   htmlwidgets[JS],
   glue[glue],
   stringr[str_detect]
@@ -26,8 +18,9 @@ box::use(
 #' @export
 ui <- function(id) {
   ns <- NS(id)
+  
   echarts4rOutput(outputId = ns("chart_tempo_1"))
-      
+  
     
   
 }
@@ -58,8 +51,9 @@ server <- function(id, dados, filtro) {
       titulo <- transformar_titulo(dados_aqui) %>% round()
       titulo <- paste0("Média de acessos por dia: ", titulo)
       
+      if(nrow(dados_aqui) > 0){
+        
       tabela <- tabela_Geracao(dados_aqui)
-      
       
       grafico <- tabela %>%
         e_chart(Data) %>%
@@ -86,8 +80,33 @@ server <- function(id, dados, filtro) {
                                  fontStyle = "normal"),
                 subtext = titulo, 
                 subtextStyle = list(fontSize = 14,
-                                 fontStyle = "italic"))
+                                 fontStyle = "italic")) %>% 
+        e_show_loading(text = "Carregando",
+                       color = "#8aa8ff",
+                       text_color = "#000",
+                       mask_color = "rgba(255, 255, 255, 1)")
+      }
       
+      if(nrow(dados_aqui) == 0){
+        x <- data.frame(Sale = 1, modelo = "A", stringsAsFactors = F)
+        
+        grafico <- e_charts(x,
+                          modelo) %>%
+          e_bar(Sale,
+                animation = T) %>%
+          e_legend(show = FALSE) %>%
+          e_color("transparent") %>%
+          e_labels(position = "inside",
+                   formatter = "Região sem respostas válidas",
+                   fontSize = 30,
+                   color = "black") %>%
+          e_x_axis(show = FALSE) %>%
+          e_y_axis(show = FALSE) %>% 
+          e_show_loading(text = "Carregando",
+                         color = "#8aa8ff",
+                         text_color = "#000",
+                         mask_color = "rgba(255, 255, 255, 1)")
+      }
       
       return(grafico)
       

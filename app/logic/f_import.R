@@ -1,7 +1,6 @@
 box::use(
   dplyr[`%>%`,
         as_tibble,
-        bind_rows, 
         case_when,
         filter,
         mutate]

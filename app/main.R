@@ -21,9 +21,6 @@ ui <- function(id) {
   ns <- NS(id)
   
   page_fluid(
-    
-     # theme = bs_theme(bootswatch = "shiny",
-     #                  primary =  "#002a54"),
     title = "Painel de Acompanhamento ANQP",
     header$ui(ns("titulo"), 
               "Painel de acompanhamento da ANQP - 2024",
@@ -32,16 +29,16 @@ ui <- function(id) {
       id = ns("rede"),
       nav_panel(
         title = "Rede Presencial",
-                value = "presencial",
-                relatorio$ui(ns("presencial"))
+        value = "presencial",
+        relatorio$ui(ns("presencial"))
       ),
       nav_panel(
         title = "Rede EAD",
-                value = "ead",
-                relatorio$ui(ns("ead")))
+        value = "ead",
+        relatorio$ui(ns("ead")))
     )
   )
-    
+  
   
 }
 
@@ -63,5 +60,5 @@ server <- function(id) {
     selecao_e <- relatorio$server("ead", dados, dados1, selecao_p)
     
     
-    })
+  })
 }

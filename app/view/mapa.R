@@ -5,7 +5,8 @@ box::use(
   dplyr[filter, mutate, count, left_join, select, pull, summarise, n],
   stats[quantile],
   sf[...],
-  purrr[map2]
+  purrr[map2],
+  tidyr[replace_na]
 )
 
 box::use(
@@ -58,12 +59,16 @@ server <- function(id, brasil, dados) {
         ) %>%
         filter(!is.na(DR2))
       
+      valor <- juncao$Tx[juncao$Tx == "Abaixo - 25% ou mais"][1]
+      
       brasil <- brasil %>%
         select(-Porc) %>%
         left_join(juncao %>% select(-Total),
                   by = c("CD_GEOCUF" = "DR2")
         ) %>%
-        mutate(label = map2(DR, Taxa, ~ {
+        mutate(Tx = replace_na(Tx, valor),
+               Taxa = replace_na(Taxa, 0),
+               label = map2(DR, Taxa, ~ {
           htmltools::HTML((paste0(
             .x,
             "<br><strong> Taxa: </strong>",

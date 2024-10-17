@@ -12,8 +12,9 @@ box::use(
 #' @export
 ui <- function(id) {
   ns <- NS(id)
+
       echarts4rOutput(outputId = ns("grafico_dr_1"))
-      
+
     
   
 }
@@ -66,12 +67,14 @@ server <- function(id, dados, filtro) {
                           linha == "TO" ~ "Tocantins",
                           .default = "Brasil")
       
-      
-      
-      dados() %>%
+      dados_aqui <- dados() %>%
         filter(!is.na(valido)) %>%
         filter(str_detect(DR, linha)) %>%
-        count(tp.aparelho, name = "Quantidade", sort = T) %>%
+        count(tp.aparelho, name = "Quantidade", sort = T)
+      
+      
+      if(nrow(dados_aqui) > 0){
+      grafico <- dados_aqui %>%
         e_charts(tp.aparelho) %>%
         e_pie(Quantidade,
               percentPrecision = 1,
@@ -104,7 +107,36 @@ server <- function(id, dados, filtro) {
         e_title(text = "Distribuição dos válidos, por tipo de aparelho utilizado,\nANQP 2024",
                 #subtext = titulo,
                 textStyle = list(fontSize = 18,
-                                 fontStyle = "normal"))
+                                 fontStyle = "normal")) %>% 
+        e_show_loading(text = "Carregando",
+                       color = "#8aa8ff",
+                       text_color = "#000",
+                       mask_color = "rgba(255, 255, 255, 1)")
+      }
+      
+      if(nrow(dados_aqui) == 0){
+        x <- data.frame(Sale = 1, modelo = "A", stringsAsFactors = F)
+        
+        grafico <- e_charts(x,
+                            modelo) %>%
+          e_bar(Sale,
+                animation = T) %>%
+          e_legend(show = FALSE) %>%
+          e_color("transparent") %>%
+          e_labels(position = "inside",
+                   formatter = "Região sem respostas válidas",
+                   fontSize = 30,
+                   color = "black") %>%
+          e_x_axis(show = FALSE) %>%
+          e_y_axis(show = FALSE) %>% 
+          e_show_loading(text = "Carregando",
+                         color = "#8aa8ff",
+                         text_color = "#000",
+                         mask_color = "rgba(255, 255, 255, 1)")
+      }
+      
+      return(grafico)
+      
     })
     
     

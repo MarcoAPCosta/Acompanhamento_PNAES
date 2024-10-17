@@ -99,6 +99,7 @@ ui <- function(id) {
                   ),
                   card(
                     full_screen = TRUE,
+                   
                     card_body(
                       grafico_taxa$ui(ns("taxa"))
                     )
@@ -106,6 +107,7 @@ ui <- function(id) {
                   
                   card(
                     full_screen = TRUE,
+                   
                     card_body(
                       tp_aparelho$ui(ns("tp"))
                     )
@@ -185,7 +187,7 @@ server <- function(id, dados, dados1, selecao_fora) {
       if(valor == "BR"){
         saida <- dados1() %>% 
           summarise(across(c(pop_a, pop_p),
-                           ~sum(.x))) %>% 
+                           ~sum(.x, na.rm =T))) %>% 
           mutate(tx = pop_p/pop_a)
       }else{
         saida <- dados1() %>%
@@ -226,23 +228,40 @@ server <- function(id, dados, dados1, selecao_fora) {
     })
     
     output$acessos <- renderText({
-      dados2_filtrado() %>% count() %>% pull(n) %>% formatar_numero
+      x <- dados2_filtrado() %>% count() %>% pull(n) %>% formatar_numero
     })
     
     output$medio <- renderText({
-      dados2_filtrado() %>%
+      
+      x <- dados2_filtrado()
+      
+      if(nrow(x) > 0){
+      saida <- x %>%
         summarise(media = round(mean(tempo), 2)) %>% 
         pull(media) %>%
         formatar_numero() %>% 
         paste("mins")
+      }
+      
+      if(nrow(x) == 0) saida <- "0"
+      
+      return(saida)
     })
     
     output$mediana <- renderText({
-      dados2_filtrado() %>% 
-        summarise(mediana = round(median(tempo), 2)) %>%
-        pull(mediana) %>%
-        formatar_numero %>% 
-        paste("mins")
+      
+      x <- dados2_filtrado()
+      if(nrow(x) > 0){
+        saida <- x %>% 
+          summarise(mediana = round(median(tempo), 2)) %>%
+          pull(mediana) %>%
+          formatar_numero %>% 
+          paste("mins")
+      }
+      
+      if(nrow(x) == 0) saida <- "0"
+      
+      return(saida)
     })
     
     return(selecao)
