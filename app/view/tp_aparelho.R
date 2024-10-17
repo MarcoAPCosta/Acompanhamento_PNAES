@@ -78,7 +78,7 @@ server <- function(id, dados, filtro) {
         e_charts(tp.aparelho) %>%
         e_pie(Quantidade,
               percentPrecision = 1,
-              center = c("65%", "50%"),
+              center = c("50%", "50%"),
               itemStyle = list(borderColor = "rgba(0, 0, 0, 0.30)"),
               labelLine = list(show = TRUE,
                                length = 5,
@@ -100,7 +100,7 @@ server <- function(id, dados, filtro) {
                  fontSize = 16) %>%
         e_legend(orient = 'vertical',
                  left = "0%",
-                 top = "middle",
+                 top = "bottom",
                  itemStyle = list(borderColor =  "rgba(0, 0, 0, 1)",
                                   borderWidth =  0.5),
                  selectedMode = FALSE) %>%
