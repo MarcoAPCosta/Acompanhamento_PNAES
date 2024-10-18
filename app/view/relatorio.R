@@ -134,7 +134,7 @@ ui <- function(id) {
                   col_widths = c(4, 4, 4, 6, 6),
                   value_box(
                     title = "População Alvo do Brasil:",
-                    value = "312.153",
+                    value = textOutput(ns("pop_brasil")),
                     showcase = bs_icon("people-fill"),
                     theme = value_box_theme(fg = "#000",
                                             bg = "#fff")
@@ -276,13 +276,31 @@ server <- function(id, dados, dados1, selecao_fora) {
       
     })
     
+    
+    popbrasil <- reactive({
+      
+      saida <- dados1() %>% 
+        summarise(pop_a = sum(pop_a, na.rm = T)) %>% 
+        pull(pop_a)
+     
+      return(saida)
+    })
+    
+    
     output$tx_brasil <- renderText({
       valor <- validos_brasil()
-      
-      saida <- valor/312153
+      numerador <- popbrasil()
+      saida <- valor/numerador
       
       saida <- formatar_numero(saida, percent = T)
       
+      return(saida)
+    })
+    
+    output$pop_brasil <- renderText({
+      saida <- popbrasil() %>% 
+        formatar_numero(ndigitos = 0)
+      print(saida)
       return(saida)
     })
     
