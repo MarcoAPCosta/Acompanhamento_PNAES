@@ -12,7 +12,7 @@ f_importar <- function(selecao){
   
   
   
-  dados1 <- readRDS("app/data/dados_p.Rds") %>% 
+  dados1 <- readRDS("app/data/dados_p.rds") %>% 
     as_tibble() %>%
     filter(ead == selecao)
   return(dados1)

@@ -5,7 +5,7 @@ box::use(
 )
 
 #' @export
-brasil <- readRDS("app/data/br_uf_shape.rds")
+brasil <- readRDS("app/data/br_uf_shape.Rds")
 
 #' @export
 opcoes <- readRDS("app/data/opcoes.Rds")
