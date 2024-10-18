@@ -55,11 +55,12 @@ server <- function(id, dados) {
                 defaultColDef = colDef(format = colFormat(separators = TRUE,
                                                           locales = "pt-BR")),
                 theme = reactableTheme(
+                  color = "black",
                   highlightColor = "#8aa8ff",
                   headerStyle = list(
                     color = "white",
                     fontWeight = "bold",
-                    backgroundColor = "#002a54",
+                    backgroundColor = "#ffa32a",
                     fontSize = "18px"
                                      )
                 ),
@@ -72,7 +73,7 @@ server <- function(id, dados) {
                   ),
                   Validos = colDef(
                     filterable = FALSE,
-                    name = "Válidos",
+                    name = "Total de questionários válidos",
                     align = "center",
                     style = list(
                       fontSize = "16px"
@@ -80,7 +81,7 @@ server <- function(id, dados) {
                     )
                                       ),
                   Total = colDef(
-                    name = "Total",
+                    name = "População Alvo",
                     align = "center"
                   ),
                   Taxa = colDef(

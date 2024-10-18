@@ -46,25 +46,25 @@ ui <- function(id) {
                   select_DR$ui(ns("selecao")),
                   
                   value_box(
-                            title = "População Alvo:",
-                            value = textOutput(ns("popalvo")),
-                            showcase = bs_icon("people-fill"),
-                            theme = value_box_theme(fg = "#000",
-                                                    bg = "#fff")
+                    title = "População Alvo:",
+                    value = textOutput(ns("popalvo")),
+                    showcase = bs_icon("people-fill"),
+                    theme = value_box_theme(fg = "#000",
+                                            bg = "#fff")
                   ),
                   value_box(
-                            title = "População Alvo com contato:",
-                            value = textOutput(ns("poppesq")),
-                            showcase = bs_icon("person-check-fill"),
-                            theme = value_box_theme(fg = "#000",
-                                                    bg = "#fff")
+                    title = "População Alvo com contato:",
+                    value = textOutput(ns("poppesq")),
+                    showcase = bs_icon("person-check-fill"),
+                    theme = value_box_theme(fg = "#000",
+                                            bg = "#fff")
                   ),
                   value_box(
-                            title = "Taxa de Cobertura:",
-                            value = textOutput(ns("taxacob")),
-                            showcase = bs_icon("percent"),
-                            theme = value_box_theme(fg = "#000",
-                                                    bg = "#fff")
+                    title = "Taxa de Cobertura:",
+                    value = textOutput(ns("taxacob")),
+                    showcase = bs_icon("percent"),
+                    theme = value_box_theme(fg = "#000",
+                                            bg = "#fff")
                   )
                 )
       )
@@ -121,34 +121,40 @@ ui <- function(id) {
     hr(),
     #ui3
     card(
-      card_body(style = "background-color: #002a54;
-                         color: white;",
-                layout_columns(
-                  col_widths = c(6,6),
-                  card(
-                    full_screen = TRUE,
-                    card_header("Quantitativo de válidos e Taxa de resposta (%), por Departamento Regional, ANQP 2024",
-                                style = "font-size: 24px; 
+      card_header("Questionários válidos e Taxa de resposta",
+                  style = "font-size: 24px; 
                  text-align: center;
                  background-color: #8aa8ff;
                  color: white;
                  "),
-                    card_body(
-                      tabela$ui(ns("tabela"))
-                    )
+      
+      card_body(style = "background-color: #002a54;
+                         color: white;",
+                layout_columns(
+                  col_widths = c(4, 4, 4, 6, 6),
+                  value_box(
+                    title = "População Alvo do Brasil:",
+                    value = "312.153",
+                    showcase = bs_icon("people-fill"),
+                    theme = value_box_theme(fg = "#000",
+                                            bg = "#fff")
                   ),
-                  card(
-                    full_screen = TRUE,
-                    card_header("Taxa de resposta  (%), por Departamento Regional, ANQP 2024",
-                                style = "font-size: 24px;
-                             text-align: center;
-                             background-color: #8aa8ff;
-                             color: white;
-                             "),
-                    card_body(style = "background-color: 	#dddddd;",
-                              mapa$ui(ns("mapa"))
-                    )
-                  )
+                  value_box(
+                    title = "Questionários válidos do Brasil:",
+                    value = textOutput(ns("val_brasil")),
+                    showcase = bs_icon("clipboard-check-fill"),
+                    theme = value_box_theme(fg = "#000",
+                                            bg = "#fff")
+                  ),
+                  value_box(
+                    title = "Taxa de resposta do Brasil:",
+                    value = textOutput(ns("tx_brasil")),
+                    showcase = bs_icon("percent"),
+                    theme = value_box_theme(fg = "#000",
+                                            bg = "#fff")
+                  ),
+                  tabela$ui(ns("tabela")),
+                  mapa$ui(ns("mapa"))
                 )
       )
     )
@@ -254,6 +260,28 @@ server <- function(id, dados, dados1, selecao_fora) {
       }
       
       if(nrow(x) == 0) saida <- "0"
+      
+      return(saida)
+    })
+    
+    validos_brasil <- reactive({
+      dados() %>%
+        filter(!is.na(valido)) %>% 
+        filter(valido==1) %>% 
+        nrow()
+    })
+    output$val_brasil <- renderText({
+      validos_brasil() %>% 
+        formatar_numero()
+      
+    })
+    
+    output$tx_brasil <- renderText({
+      valor <- validos_brasil()
+      
+      saida <- valor/312153
+      
+      saida <- formatar_numero(saida, percent = T)
       
       return(saida)
     })
