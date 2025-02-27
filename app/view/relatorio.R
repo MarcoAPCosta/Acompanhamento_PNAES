@@ -22,7 +22,9 @@ box::use(
 
 box::use(
   app/logic/global[brasil, dados_p, pop1],
-  app/logic/funcoes_auxiliares[formatar_numero]
+  app/logic/funcoes_auxiliares[formatar_numero],
+  app/logic/funcoes_calculo[...],
+  app/logic/popbrasil[validos_brasil]
 )
 
 #' @export
@@ -233,36 +235,12 @@ server <- function(id, dados, dados1, selecao_fora) {
     
     output$medio <- renderText({
       
-      x <- dados2_filtrado()
-      
-      if(nrow(x) > 0){
-        saida <- x %>%
-          summarise(media = round(mean(tempo), 2)) %>% 
-          pull(media) %>%
-          formatar_numero() %>% 
-          paste("mins")
-      }
-      
-      if(nrow(x) == 0) saida <- "0"
-      
-      return(saida)
-    })
+      media(dados2_filtrado())
+       })
     
     output$mediana <- renderText({
-      
-      x <- dados2_filtrado()
-      if(nrow(x) > 0){
-        saida <- x %>% 
-          summarise(mediana = round(median(tempo), 2)) %>%
-          pull(mediana) %>%
-          formatar_numero %>% 
-          paste("mins")
-      }
-      
-      if(nrow(x) == 0) saida <- "0"
-      
-      return(saida)
-    })
+      mediana(dados2_filtrado())
+      })
     
     validos_brasil <- reactive({
       dados() %>%
