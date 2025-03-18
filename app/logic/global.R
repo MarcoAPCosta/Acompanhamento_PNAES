@@ -23,3 +23,18 @@ titulo_mapa <- tags$div(
     font-weight: bold;
     font-size: 28px;")
 )  
+
+#' @export
+cor_p <- "#010e67"
+
+#' @export
+cor_s <- "#8853c3"
+
+#' @export
+cor_s1 <- "#7bd0f0"
+
+#' @export
+cor_s2 <- "#e4e0e0"
+
+#' @export
+cor_extra <- "#A7CBDC"

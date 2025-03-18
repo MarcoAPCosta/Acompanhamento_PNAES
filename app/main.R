@@ -1,7 +1,8 @@
 box::use(
   shiny[moduleServer,
         NS,
-        reactive],
+        reactive,
+        tags],
   bslib[bs_theme,
         page_fluid,
         nav_panel,
@@ -15,16 +16,25 @@ box::use(
   app/view/dados1,
 )
 
+box::use(
+  app/logic/global[...]
+)
 
 #' @export
 ui <- function(id) {
   ns <- NS(id)
   
   page_fluid(
-    title = "Painel de Acompanhamento ANQP",
-    header$ui(ns("titulo"), 
-              "Painel de acompanhamento da ANQP - 2024",
-              "xxx-large"),
+    title = "Painel de Acompanhamento PNAES",
+    # header$ui(ns("titulo"), 
+    #           "Painel de acompanhamento da PNAES - 2024",
+    #           "xxx-large"),
+     tags$head(tags$style(paste("
+                            
+ body {
+   background:",cor_p,"
+ }
+ "))),
     navset_tab(
       id = ns("rede"),
       nav_panel(

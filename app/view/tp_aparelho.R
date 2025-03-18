@@ -9,6 +9,10 @@ box::use(
   
 )
 
+box::use(
+  app/logic/global[...]
+)
+
 #' @export
 ui <- function(id) {
   ns <- NS(id)
@@ -84,9 +88,9 @@ server <- function(id, dados, filtro) {
                                length2 = 5,
                                shadowColor = 'rgba(0, 0, 0, 100)',
                                shadowBlur = 2)) %>%
-        e_color(c("#002a54",
-                  "#8aa8ff",
-                  "#ffa32a")) %>% 
+        e_color(c(cor_p,
+                  cor_s,
+                  cor_s2)) %>% 
         e_tooltip(valueFormatter = JS("function(value) {
           saida = value.toString().replace(',', '.');
           return saida

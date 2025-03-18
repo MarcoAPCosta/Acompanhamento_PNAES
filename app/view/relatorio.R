@@ -9,6 +9,7 @@ box::use(
         value_box_theme],
   bsicons[bs_icon],
   stats[median],
+  glue[glue]
 )
 
 box::use(
@@ -18,13 +19,19 @@ box::use(
   app/view/mapa,
   app/view/tabela,
   app/view/header,
+  app/view/dados1_filtro,
+  app/view/dados2_filtro,
+  app/view/popbr,
+  app/view/validos_br
 )
 
 box::use(
-  app/logic/global[brasil, dados_p, pop1],
+  app/logic/global[...],
   app/logic/funcoes_auxiliares[formatar_numero],
   app/logic/funcoes_calculo[...],
-  app/logic/popbrasil[validos_brasil]
+  app/logic/popbrasil[validos_brasil],
+  app/logic/pop_tx_[...],
+  app/logic/dados_filtro[...]
 )
 
 #' @export
@@ -36,13 +43,12 @@ ui <- function(id) {
     card(
       style = "margin-top: 20px",
       card_header("População e cadastro",
-                  style = "font-size: 24px;
-                  text-align: center;
-                  background-color: #8aa8ff;
-                  color: white;
-                  "),
-      card_body(style = "background-color: #002a54;
-                         color: white;",
+                  style = glue("font-size: 24px;
+                            text-align: center;
+                            background-color: {cor_s};
+                            color: white;")),
+      card_body(style = glue("background-color: {cor_p};
+                         color: white;"),
                 layout_columns(
                   col_widths = c(3, 3, 3, 3),
                   select_DR$ui(ns("selecao")),
@@ -52,21 +58,21 @@ ui <- function(id) {
                     value = textOutput(ns("popalvo")),
                     showcase = bs_icon("people-fill"),
                     theme = value_box_theme(fg = "#000",
-                                            bg = "#fff")
+                                            bg = "#e4e0e0")
                   ),
                   value_box(
                     title = "População Alvo com contato:",
                     value = textOutput(ns("poppesq")),
                     showcase = bs_icon("person-check-fill"),
                     theme = value_box_theme(fg = "#000",
-                                            bg = "#fff")
+                                            bg = "#e4e0e0")
                   ),
                   value_box(
                     title = "Taxa de Cobertura:",
                     value = textOutput(ns("taxacob")),
                     showcase = bs_icon("percent"),
                     theme = value_box_theme(fg = "#000",
-                                            bg = "#fff")
+                                            bg = "#e4e0e0")
                   )
                 )
       )
@@ -75,13 +81,12 @@ ui <- function(id) {
     #ui2
     card(
       card_header("Informações do acesso ao questionário",
-                  style = "font-size: 24px;
-                  text-align: center;
-                  background-color: #8aa8ff;
-                  color: white;
-                  "),
-      card_body(style = "background-color: #002a54;
-                         color: white;",
+                  style =  glue("font-size: 24px;
+                            text-align: center;
+                            background-color: {cor_s};
+                            color: white;")),
+      card_body(style = glue("background-color: {cor_p};
+                         color: white;"),
                 layout_columns(
                   col_widths = c(2, 6, 4),
                   # header$ui(ns("titulo2"),
@@ -124,14 +129,13 @@ ui <- function(id) {
     #ui3
     card(
       card_header("Questionários válidos e Taxa de resposta",
-                  style = "font-size: 24px; 
-                 text-align: center;
-                 background-color: #8aa8ff;
-                 color: white;
-                 "),
+                  style = glue("font-size: 24px;
+                            text-align: center;
+                            background-color: {cor_s};
+                            color: white;")),
       
-      card_body(style = "background-color: #002a54;
-                         color: white;",
+      card_body(style = glue("background-color: {cor_p};
+                         color: white;"),
                 layout_columns(
                   col_widths = c(4, 4, 4, 6, 6),
                   value_box(
@@ -183,31 +187,13 @@ server <- function(id, dados, dados1, selecao_fora) {
         filter(DR == selecao()) |> 
         filter(ead == ead_valor())
     })
-    
-    dados1_filtrado <- reactive({req(selecao())
-      valor <- selecao()
-      if(valor == "BR"){
-        saida <- dados1() %>% 
-          summarise(across(c(pop_a, pop_p),
-                           ~sum(.x, na.rm =T))) %>% 
-          mutate(tx = pop_p/pop_a)
-      }else{
-        saida <- dados1() %>%
-          filter(DR == selecao())
-      }
-      return(saida)
-    })
+    dados1_filtrado <- dados1_filtro$server("asdasd", dados1, selecao)
     
     
-    dados2_filtrado <- reactive({req(selecao())
-      valor <- selecao()
-      if(valor == "BR"){
-        saida <- dados()}else{
-          saida <- dados() %>%
-            filter(DR == selecao())
-        }
-      return(saida)
-    })
+    
+    
+    dados2_filtrado <- dados2_filtro$server("asdasda", dados, selecao)
+      
     
     grafico_taxa$server("taxa", dados, selecao)
     
@@ -242,44 +228,25 @@ server <- function(id, dados, dados1, selecao_fora) {
       mediana(dados2_filtrado())
       })
     
-    validos_brasil <- reactive({
-      dados() %>%
-        filter(!is.na(valido)) %>% 
-        filter(valido==1) %>% 
-        nrow()
-    })
+    validos_brasil <- validos_br$server("asdasd", dados)
+   
     output$val_brasil <- renderText({
       validos_brasil() %>% 
         formatar_numero()
       
     })
     
+    popbrasil <- popbr$server("asdasd", dados1)
     
-    popbrasil <- reactive({
-      
-      saida <- dados1() %>% 
-        summarise(pop_a = sum(pop_a, na.rm = T)) %>% 
-        pull(pop_a)
-     
-      return(saida)
-    })
     
     
     output$tx_brasil <- renderText({
-      valor <- validos_brasil()
-      numerador <- popbrasil()
-      saida <- valor/numerador
+      tx_b(validos_brasil(), popbrasil())
       
-      saida <- formatar_numero(saida, percent = T)
-      
-      return(saida)
     })
     
     output$pop_brasil <- renderText({
-      saida <- popbrasil() %>% 
-        formatar_numero(ndigitos = 0)
-      print(saida)
-      return(saida)
+      pop_b(popbrasil()) 
     })
     
     return(selecao)

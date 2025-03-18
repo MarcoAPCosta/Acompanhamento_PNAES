@@ -15,6 +15,10 @@ box::use(
   titulo_grafico_t = app/logic/titulo_grafico_a[transformar_titulo]
 )
 
+box::use(
+  app/logic/global[...]
+)
+
 #' @export
 ui <- function(id) {
   ns <- NS(id)
@@ -66,7 +70,7 @@ server <- function(id, dados, filtro) {
         maximumFractionDigits:0});
         return fmt.format(value);
       }')) %>%
-        e_theme_custom('{"color":["#002a54"]}') %>%
+        e_theme_custom(glue('{{"color":["{cor_p}"]}}')) %>%
         e_y_axis(formatter = JS('function(value) {
         var fmt = new Intl.NumberFormat("pt-BR",
         {style:"decimal",

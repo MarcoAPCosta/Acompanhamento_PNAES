@@ -56,11 +56,11 @@ server <- function(id, dados) {
                                                           locales = "pt-BR")),
                 theme = reactableTheme(
                   color = "black",
-                  highlightColor = "#8aa8ff",
+                  highlightColor = "#e4e0e0",
                   headerStyle = list(
                     color = "white",
                     fontWeight = "bold",
-                    backgroundColor = "#ffa32a",
+                    backgroundColor = "#7bd0f0",
                     fontSize = "18px"
                                      )
                 ),

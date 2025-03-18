@@ -10,7 +10,7 @@ box::use(
 )
 
 box::use(
-  app/logic/global[titulo_mapa]
+  app/logic/global[...]
 )
 #' @export
 ui <- function(id) {
@@ -78,7 +78,7 @@ server <- function(id, brasil, dados) {
         }))
       
       cores <- colorFactor(
-        c("#D7E8F0", "#B0C8F7", "#8AA8FF", "#4569A9", "#002A54"),
+        rev(c("#000D66", "#4B6AA9", "#7AD0F0", "#B5D8E8", "#E4DFDF")),
         domain = brasil$Tx,
         levels = levels(brasil$Tx),
         na.color = "red"
