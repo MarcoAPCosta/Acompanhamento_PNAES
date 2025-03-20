@@ -78,7 +78,7 @@ server <- function(id, brasil, dados) {
         }))
       
       cores <- colorFactor(
-        rev(c("#000D66", "#4B6AA9", "#7AD0F0", "#B5D8E8", "#E4DFDF")),
+        rev(palheta_mapa),
         domain = brasil$Tx,
         levels = levels(brasil$Tx),
         na.color = "red"

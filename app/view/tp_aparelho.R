@@ -107,12 +107,12 @@ server <- function(id, dados, filtro) {
                  itemStyle = list(borderColor =  "rgba(0, 0, 0, 1)",
                                   borderWidth =  0.5),
                  selectedMode = FALSE) %>%
-        e_title(text = "Distribuição dos acessos, por tipo de aparelho utilizado,\nANQP 2024",
+        e_title(text = "Distribuição dos acessos, por tipo de aparelho utilizado,\nPNAES 2024",
                 #subtext = titulo,
                 textStyle = list(fontSize = 18,
                                  fontStyle = "normal")) %>% 
         e_show_loading(text = "Carregando",
-                       color = "#8aa8ff",
+                       color = cor_s1,
                        text_color = "#000",
                        mask_color = "rgba(255, 255, 255, 1)")
       }
@@ -133,7 +133,7 @@ server <- function(id, dados, filtro) {
           e_x_axis(show = FALSE) %>%
           e_y_axis(show = FALSE) %>% 
           e_show_loading(text = "Carregando",
-                         color = "#8aa8ff",
+                         color = cor_s1,
                          text_color = "#000",
                          mask_color = "rgba(255, 255, 255, 1)")
       }

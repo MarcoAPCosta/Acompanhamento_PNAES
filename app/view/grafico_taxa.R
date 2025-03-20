@@ -16,7 +16,7 @@ box::use(
 )
 
 box::use(
-  app/logic/global[...]
+  app/logic/global[cor_p, cor_s1]
 )
 
 #' @export
@@ -79,14 +79,14 @@ server <- function(id, dados, filtro) {
         return fmt.format(value);
       }'),
                  axisLabel = list(fontSize = 14)) %>%
-        e_title(text = "Total de acessos por dia, ANQP 2024",
+        e_title(text = "Total de acessos por dia, PNAES 2024",
                 textStyle = list(fontSize = 18,
                                  fontStyle = "normal"),
                 subtext = titulo, 
                 subtextStyle = list(fontSize = 14,
                                  fontStyle = "italic")) %>% 
         e_show_loading(text = "Carregando",
-                       color = "#8aa8ff",
+                       color = cor_s1,
                        text_color = "#000",
                        mask_color = "rgba(255, 255, 255, 1)")
       }
@@ -107,7 +107,7 @@ server <- function(id, dados, filtro) {
           e_x_axis(show = FALSE) %>%
           e_y_axis(show = FALSE) %>% 
           e_show_loading(text = "Carregando",
-                         color = "#8aa8ff",
+                         color = cor_s1,
                          text_color = "#000",
                          mask_color = "rgba(255, 255, 255, 1)")
       }

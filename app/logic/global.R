@@ -18,7 +18,7 @@ pop1 <- 400000
 
 #' @export
 titulo_mapa <- tags$div(
-  h3("Taxa de resposta (%), por Departamento Regional, ANQP 2024", 
+  h3("Taxa de resposta (%), por Departamento Regional, PNAES 2024", 
      style = " color: black;
     font-weight: bold;
     font-size: 28px;")
@@ -38,3 +38,15 @@ cor_s2 <- "#e4e0e0"
 
 #' @export
 cor_extra <- "#A7CBDC"
+
+#'@export
+cor_tabela <- "#7982E5"
+
+#' @export
+palheta_mapa <- c("#000D66", "#4B6AA9", "#7AD0F0", "#B5D8E8", "#E4DFDF")
+
+#' @export
+preenchimento_valuebox <- "#e4e0e0"
+
+#' @export
+preenchimento_card <- c("#010E67", "#2647B2", "#4D85E5", "#7BD0F0")

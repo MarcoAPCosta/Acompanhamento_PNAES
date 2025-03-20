@@ -9,7 +9,7 @@ box::use(
 
 
 box::use(
-  app/logic/global[opcoes]
+  app/logic/global[opcoes, cor_tabela]
 )
 
 
@@ -60,7 +60,7 @@ server <- function(id, dados) {
                   headerStyle = list(
                     color = "white",
                     fontWeight = "bold",
-                    backgroundColor = "#7bd0f0",
+                    backgroundColor = cor_tabela,
                     fontSize = "18px"
                                      )
                 ),
