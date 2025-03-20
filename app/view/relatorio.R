@@ -6,7 +6,7 @@ box::use(
         card_header,
         layout_columns,
         value_box,
-        value_box_theme],
+        value_box_theme, css],
   bsicons[bs_icon],
   stats[median],
   glue[glue]
@@ -26,7 +26,7 @@ box::use(
 )
 
 box::use(
-  app/logic/global[preenchimento_valuebox, cor_p, cor_s, brasil, preenchimento_card],
+  app/logic/global[preenchimento_valuebox, cor_p, cor_s, brasil, preenchimento_card, borda_valuebox],
   app/logic/funcoes_auxiliares[formatar_numero],
   app/logic/funcoes_calculo[mediana, media],
   app/logic/popbrasil[validos_brasil],
@@ -45,10 +45,10 @@ ui <- function(id) {
       card_header("População e cadastro",
                   style = glue("font-size: 24px;
                             text-align: center;
-                            background-color: {cor_s};
+                            background-color: {cor_p};
                             color: white;")),
       card_body(style = glue("
-  background: linear-gradient(135deg, 
+  background: linear-gradient(180deg, 
                              {paste(preenchimento_card, collapse = ', ')}
   );
   color: white;
@@ -61,36 +61,35 @@ ui <- function(id) {
                     title = "População Alvo:",
                     value = textOutput(ns("popalvo")),
                     showcase = bs_icon("people-fill"),
-                    theme = value_box_theme(fg = "black",
+                    theme = value_box_theme(fg = "white",
                                             bg = preenchimento_valuebox)
                   ),
                   value_box(
                     title = "População Alvo com contato:",
                     value = textOutput(ns("poppesq")),
                     showcase = bs_icon("person-check-fill"),
-                    theme = value_box_theme(fg = "#000",
+                    theme = value_box_theme(fg = "white",
                                             bg = preenchimento_valuebox)
                   ),
                   value_box(
                     title = "Taxa de Cobertura:",
                     value = textOutput(ns("taxacob")),
                     showcase = bs_icon("percent"),
-                    theme = value_box_theme(fg = "#000",
+                    theme = value_box_theme(fg = "white",
                                             bg = preenchimento_valuebox)
                   )
                 )
       )
     ),
-    hr(),
     #ui2
     card(
       card_header("Informações do acesso ao questionário",
                   style =  glue("font-size: 24px;
                             text-align: center;
-                            background-color: {cor_s};
+                            background-color: {cor_p};
                             color: white;")),
       card_body(style = glue("
-  background: linear-gradient(135deg, 
+  background: linear-gradient(180deg, 
                              {paste(preenchimento_card, collapse = ', ')}
   );
   color: white;
@@ -104,19 +103,19 @@ ui <- function(id) {
                     value_box(
                       title = "Total de Acessos:",
                       value = textOutput(ns("acessos")),
-                      theme = value_box_theme(fg = "#000",
+                      theme = value_box_theme(fg = "white",
                                               bg = preenchimento_valuebox)
                     ),
                     value_box(
                       title = "Tempo médio de resposta:",
                       value = textOutput(ns("medio")),
-                      theme = value_box_theme(fg = "#000",
+                      theme = value_box_theme(fg = "white",
                                               bg = preenchimento_valuebox)
                     ),
                     value_box(
                       title = "Tempo mediano de resposta:",
                       value = textOutput(ns("mediana")),
-                      theme = value_box_theme(fg = "#000",
+                      theme = value_box_theme(fg = "white",
                                               bg = preenchimento_valuebox)
                     )
                   ),
@@ -139,17 +138,16 @@ ui <- function(id) {
                 )
       )
     ),
-    hr(),
     #ui3
     card(
       card_header("Questionários válidos e Taxa de resposta",
                   style = glue("font-size: 24px;
                             text-align: center;
-                            background-color: {cor_s};
+                            background-color: {cor_p};
                             color: white;")),
       
       card_body(style = glue("
-  background: linear-gradient(135deg, 
+  background: linear-gradient(180deg, 
                              {paste(preenchimento_card, collapse = ', ')}
   );
   color: white;
@@ -160,21 +158,21 @@ ui <- function(id) {
                     title = "População Alvo do Brasil:",
                     value = textOutput(ns("pop_brasil")),
                     showcase = bs_icon("people-fill"),
-                    theme = value_box_theme(fg = "#000",
+                    theme = value_box_theme(fg = "white",
                                             bg = preenchimento_valuebox)
                   ),
                   value_box(
                     title = "Questionários válidos do Brasil:",
                     value = textOutput(ns("val_brasil")),
                     showcase = bs_icon("clipboard-check-fill"),
-                    theme = value_box_theme(fg = "#000",
+                    theme = value_box_theme(fg = "white",
                                             bg = preenchimento_valuebox)
                   ),
                   value_box(
                     title = "Taxa de resposta do Brasil:",
                     value = textOutput(ns("tx_brasil")),
                     showcase = bs_icon("percent"),
-                    theme = value_box_theme(fg = "#000",
+                    theme = value_box_theme(fg = "white",
                                             bg = preenchimento_valuebox)
                   ),
                   tabela$ui(ns("tabela")),

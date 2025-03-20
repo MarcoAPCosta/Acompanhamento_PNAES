@@ -6,7 +6,8 @@ box::use(
   bslib[bs_theme,
         page_fluid,
         nav_panel,
-        navset_tab],
+        navset_tab,
+        bs_add_rules],
   glue[glue]
 )
 
@@ -33,7 +34,7 @@ ui <- function(id) {
      tags$head(tags$style(glue("
                             
  body {{
-   background:{cor_p};
+   background:{cor_s};
  }}
  "))),
     navset_tab(

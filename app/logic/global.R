@@ -46,7 +46,10 @@ cor_tabela <- "#7982E5"
 palheta_mapa <- c("#000D66", "#4B6AA9", "#7AD0F0", "#B5D8E8", "#E4DFDF")
 
 #' @export
-preenchimento_valuebox <- "#e4e0e0"
+preenchimento_valuebox <- "#00000000"
+
+#'@export
+borda_valuebox <- "white"
 
 #' @export
 preenchimento_card <- c("#010E67", "#2647B2", "#4D85E5", "#7BD0F0")

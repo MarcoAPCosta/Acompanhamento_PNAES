@@ -11,6 +11,10 @@ h2#titulo{
   padding-right: 0px;
 }
 
+.value-box {
+        border: none !important;
+        box-shadow: none !important; 
+      }
 
 
 .nav-link.active {
@@ -24,3 +28,5 @@ h2#titulo{
   .bslib-card, .tab-content, .tab-pane, .card-body {
       overflow: visible !important;
     }
+    
+    
