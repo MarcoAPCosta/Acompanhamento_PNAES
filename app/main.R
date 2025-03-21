@@ -34,7 +34,7 @@ ui <- function(id) {
      tags$head(tags$style(glue("
                             
  body {{
-   background:{cor_s};
+   background:{cor_p};
  }}
  "))),
     navset_tab(

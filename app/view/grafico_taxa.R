@@ -16,7 +16,7 @@ box::use(
 )
 
 box::use(
-  app/logic/global[cor_p, cor_s1]
+  app/logic/global[cor_p, cor_s1, cor_s]
 )
 
 #' @export
@@ -70,7 +70,7 @@ server <- function(id, dados, filtro) {
         maximumFractionDigits:0});
         return fmt.format(value);
       }')) %>%
-        e_theme_custom(glue('{{"color":["{cor_p}"]}}')) %>%
+        e_theme_custom(glue('{{"color":["{cor_s}"]}}')) %>%
         e_y_axis(formatter = JS('function(value) {
         var fmt = new Intl.NumberFormat("pt-BR",
         {style:"decimal",

@@ -40,7 +40,7 @@ cor_s2 <- "#e4e0e0"
 cor_extra <- "#A7CBDC"
 
 #'@export
-cor_tabela <- "#7982E5"
+cor_tabela <- "#8853c3"
 
 #' @export
 palheta_mapa <- c("#000D66", "#4B6AA9", "#7AD0F0", "#B5D8E8", "#E4DFDF")
@@ -52,4 +52,7 @@ preenchimento_valuebox <- "#00000000"
 borda_valuebox <- "white"
 
 #' @export
-preenchimento_card <- c("#010E67", "#2647B2", "#4D85E5", "#7BD0F0")
+preenchimento_card <- c("#7BD0F0","#4D85E5","#4D85E5", "#7BD0F0")
+
+#' @export
+n_perder <- c("#010E67", "#2647B2")

@@ -12,17 +12,20 @@ h2#titulo{
 }
 
 .value-box {
-        border: none !important;
-        box-shadow: none !important; 
-      }
-
+    border: 2px solid white !important;
+}
 
 .nav-link.active {
-  background-color: #8853c3 !important;
+  background-color: #010e67 !important;
+  color: white !important;
 }
 
 .nav-item {
   background-color: white;
+}
+
+.bslib-card{
+  border-color: white!important;
 }
 
   .bslib-card, .tab-content, .tab-pane, .card-body {
@@ -30,3 +33,4 @@ h2#titulo{
     }
     
     
+  
