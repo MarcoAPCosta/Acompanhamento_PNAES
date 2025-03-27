@@ -17,6 +17,10 @@ h2#titulo{
   background-color: #8853c3 !important;
 }
 
+.nav-tabs {
+  border-color: #00000000;
+}
+
 .nav-item {
   background-color: white;
 }
