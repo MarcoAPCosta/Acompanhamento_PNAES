@@ -18,7 +18,11 @@ h2#titulo{
 }
 
 .nav-tabs {
-  border-color: #00000000;
+  border-color: #00000000 !important;
+}
+
+.bslib-card{
+  border-color: transparent!important;
 }
 
 .nav-item {

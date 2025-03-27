@@ -48,8 +48,7 @@ ui <- function(id) {
                             background-color: {cor_s};
                             color: white;")),
       card_body(style = glue("
-  background: linear-gradient(135deg, 
-                             {paste(preenchimento_card, collapse = ', ')}
+  background: {cor_p};
   );
   color: white;
 "),
@@ -90,8 +89,7 @@ ui <- function(id) {
                             background-color: {cor_s};
                             color: white;")),
       card_body(style = glue("
-  background: linear-gradient(135deg, 
-                             {paste(preenchimento_card, collapse = ', ')}
+  background: {cor_p};
   );
   color: white;
 "),
@@ -149,8 +147,7 @@ ui <- function(id) {
                             color: white;")),
       
       card_body(style = glue("
-  background: linear-gradient(135deg, 
-                             {paste(preenchimento_card, collapse = ', ')}
+  background: {cor_p};
   );
   color: white;
 "),
