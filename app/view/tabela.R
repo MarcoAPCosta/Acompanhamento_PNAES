@@ -4,7 +4,7 @@ box::use(
         tooltip],
   dplyr[...],
   tidyr[starts_with],
- reactable[...],
+ reactable[...]
 )
 
 
@@ -55,6 +55,7 @@ server <- function(id, dados) {
                 defaultColDef = colDef(format = colFormat(separators = TRUE,
                                                           locales = "pt-BR")),
                 theme = reactableTheme(
+                  borderColor = "#010e67",
                   color = "black",
                   highlightColor = "#e4e0e0",
                   headerStyle = list(
