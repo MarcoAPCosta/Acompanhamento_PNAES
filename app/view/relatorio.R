@@ -80,7 +80,6 @@ ui <- function(id) {
                 )
       )
     ),
-    hr(),
     #ui2
     card(
       card_header("Informações do acesso ao questionário",
@@ -137,7 +136,6 @@ ui <- function(id) {
                 )
       )
     ),
-    hr(),
     #ui3
     card(
       card_header("Questionários válidos e Taxa de resposta",

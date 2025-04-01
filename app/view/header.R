@@ -9,17 +9,18 @@ ui <- function(id, nome, tamanho = "xx-large") {
   
   tags$div(
     class = "caixa-valores",
-    tags$h2(
+    tags$div(
       id = "titulo",
-      nome,
       style = glue("
-          margin-top: 25px;
-          padding-left: 25px;
-          background: url(static/images/header.svg);
-          background-position: right;
-          background-repeat: no-repeat;
-          background-size: 30%;
-          font-size:{tamanho}")
+        margin-top: 25px;
+        padding-left: 25px;
+        background: url(static/images/header.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain; 
+        width: 100%;
+        height: 200px;
+        font-size: {tamanho}") 
     )
   )
 }

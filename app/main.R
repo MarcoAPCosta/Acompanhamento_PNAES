@@ -28,7 +28,7 @@ ui <- function(id) {
   page_fluid(
     title = "Painel de Acompanhamento PNAES",
      header$ui(ns("titulo"), 
-               "Painel de acompanhamento da PNAES - 2024",
+               "",
                "xxx-large"),
      tags$head(tags$style(glue("
                             

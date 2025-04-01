@@ -25,7 +25,7 @@ titulo_mapa <- tags$div(
 )  
 
 #' @export
-cor_p <- "#010e67"
+cor_p <- "#282957"
 
 #' @export
 cor_s <- "#8853c3"

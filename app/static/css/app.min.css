@@ -15,18 +15,34 @@ h2#titulo{
 
 .nav-link.active {
   background-color: #8853c3 !important;
+  color: white !important;
+}
+
+.nav-link:not(.active) {
+  background-color: #cccccc !important;
+  color: black !important;
 }
 
 .nav-tabs {
-  border-color: #00000000 !important;
+  border-color: white !important;
+  border-width: 2px;
 }
 
 .bslib-card{
   border-color: #010e67!important;
+  box-shadow: none !important;
+}
+
+.card{
+  border: none !important;
 }
 
 .nav-item {
   background-color: white;
+}
+
+.hr{
+  opacity: .0;
 }
 
   .bslib-card, .tab-content, .tab-pane, .card-body {
