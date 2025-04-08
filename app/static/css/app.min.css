@@ -19,13 +19,13 @@ h2#titulo{
 }
 
 .nav-link:not(.active) {
-  background-color: #cccccc !important;
+  background-color: #white !important;
   color: black !important;
 }
 
 .nav-tabs { 
-  border: 3px solid white;
-  background: white!important;
+  border: 3px solid #e4e0e0;
+  background: #e4e0e0!important;
 }
 
 .bslib-card{
