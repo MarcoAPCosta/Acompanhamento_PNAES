@@ -39,14 +39,10 @@ ui <- function(id) {
     navset_tab(
       id = ns("rede"),
       nav_panel(
-        title = "Rede Presencial",
+        title = "Egressos",
         value = "presencial",
         relatorio$ui(ns("presencial"))
-      ),
-      nav_panel(
-        title = "Rede EAD",
-        value = "ead",
-        relatorio$ui(ns("ead")))
+      )
     )
   )
   
@@ -57,18 +53,13 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
-    rede_tab <- reactive({
-      x <- ifelse(input$rede == "ead", 1, 0)
-      return(x)
-    })
-    
+
     dados <- dados$server("asdas", rede_tab)
     
     dados1 <- dados1$server("asdasd", rede_tab)
     
-    selecao_p <- relatorio$server("presencial", dados, dados1, selecao_e)
+    selecao_p <- relatorio$server("presencial", dados, dados1)
     
-    selecao_e <- relatorio$server("ead", dados, dados1, selecao_p)
     
     
   })

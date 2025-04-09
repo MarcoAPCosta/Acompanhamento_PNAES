@@ -189,16 +189,9 @@ server <- function(id, dados, dados1, selecao_fora) {
     
     
     
-    ead_valor <- reactive({
-      dados() %>%
-        pull(ead) %>% 
-        unique()
-    })
-    
     selecao1 <- reactive({req(selecao())
       dados_p |> 
-        filter(DR == selecao()) |> 
-        filter(ead == ead_valor())
+        filter(DR == selecao())
     })
     dados1_filtrado <- dados1_filtro$server("asdasd", dados1, selecao)
     
