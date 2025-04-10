@@ -12,7 +12,11 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   tagList(
-    uiOutput(ns("asd"))
+    selectInput(
+      ns("dr"),
+      "Escolha o Departamento Regional:",
+      choices = c("Brasil" = "BR", opcoes)
+    )
     
     )
   
@@ -20,23 +24,9 @@ ui <- function(id) {
 }
 
 #' @export
-server <- function(id, dados, selecao_fora) {
+server <- function(id, dados) {
   moduleServer(id, function(input, output, session) {
     
-    ns <- session$ns
-
-    output$asd <- renderUI({
-      
-      selectInput(
-        ns("dr"),
-        "Escolha o Departamento Regional:",
-        choices = c("Brasil" = "BR", opcoes)
-      )
-    })
-    
-    observeEvent(selecao_fora(), {
-      updateSelectInput(session, "dr", selected = selecao_fora())
-    })
     
     saida <- reactive({
       input$dr

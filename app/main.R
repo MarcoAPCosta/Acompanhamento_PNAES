@@ -36,14 +36,7 @@ ui <- function(id) {
    background:{cor_p};
  }}
  "))),
-    navset_tab(
-      id = ns("rede"),
-      nav_panel(
-        title = "Egressos",
-        value = "presencial",
-        relatorio$ui(ns("presencial"))
-      )
-    )
+    relatorio$ui(ns("presencial"))
   )
   
   
@@ -53,12 +46,12 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
-
-    dados <- dados$server("asdas", rede_tab)
     
-    dados1 <- dados1$server("asdasd", rede_tab)
+    dados <- dados$server("asdas")
     
-    selecao_p <- relatorio$server("presencial", dados, dados1)
+    dados1 <- dados1$server("asdasd")
+    
+    relatorio$server("presencial", dados, dados1)
     
     
     

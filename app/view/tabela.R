@@ -37,9 +37,9 @@ server <- function(id, dados) {
         filter(!is.na(valido)) %>% 
         mutate(DR = Nomes,
                .keep = "unused") %>% 
-        group_by(DR, ead) %>%
+        group_by(DR) %>%
         filter(DR != "SG") %>%
-        summarise(Validos = sum(valido == "1"),
+        summarise(Validos = sum(valido == "valido"),
                   Total = unique(Total),
                   Taxa = (Validos/Total))
      
@@ -90,7 +90,7 @@ server <- function(id, dados) {
                     filterable = FALSE,
                     format = colFormat(separators = TRUE,
                                        percent = TRUE,
-                                       digits = 1),
+                                       digits = 2),
                     align = "center",
                     style = list(
                       fontSize = "16px"

@@ -1,5 +1,6 @@
 box::use(
   dplyr[`%>%`,
+        add_count,
         as_tibble,
         case_when,
         filter,
@@ -7,7 +8,7 @@ box::use(
 )
 
 #' @export
-f_importar <- function(selecao){
+f_importar <- function(){
   
  
   
@@ -40,7 +41,8 @@ f_importar <- function(selecao){
                            DR == "SE" ~ "28",
                            DR == "SP" ~ "35",
                            DR == "TO" ~ "17",
-                           .default = NA_character_)) %>%
-    filter(ead == selecao )
+                           .default = NA_character_),
+           valido = ifelse(!is.na(sit.ocup), "valido", "invalido"))
+    
   return(dados)
 }

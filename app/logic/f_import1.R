@@ -4,16 +4,17 @@ box::use(
         bind_rows, 
         case_when,
         filter,
-        mutate]
+        mutate,
+        rename]
 )
 
 
-f_importar <- function(selecao){
+f_importar <- function(){
   
   
   
   dados1 <- readRDS("app/data/dados_p.rds") %>% 
-    as_tibble() %>%
-    filter(ead == selecao)
+    as_tibble() %>% 
+    rename(DR = DR2)
   return(dados1)
 }

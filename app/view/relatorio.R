@@ -182,21 +182,15 @@ ui <- function(id) {
 }
 
 #' @export
-server <- function(id, dados, dados1, selecao_fora) {
+server <- function(id, dados, dados1) {
   moduleServer(id, function(input, output, session) {
     
-    selecao <- select_DR$server("selecao", dados, selecao_fora)
-    
-    
-    
-    selecao1 <- reactive({req(selecao())
-      dados_p |> 
-        filter(DR == selecao())
+    selecao <- select_DR$server("selecao", dados)
+    observe({
+      print(selecao())
     })
+    
     dados1_filtrado <- dados1_filtro$server("asdasd", dados1, selecao)
-    
-    
-    
     
     dados2_filtrado <- dados2_filtro$server("asdasda", dados, selecao)
       
@@ -255,7 +249,7 @@ server <- function(id, dados, dados1, selecao_fora) {
       pop_b(popbrasil()) 
     })
     
-    return(selecao)
+
     
   })
 }

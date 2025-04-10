@@ -14,7 +14,7 @@ server <- function(id,dados) {
     validos_brasil <- reactive({
       dados() %>%
         filter(!is.na(valido)) %>% 
-        filter(valido==1) %>% 
+        filter(valido=="valido") %>% 
         nrow()
     })
     
