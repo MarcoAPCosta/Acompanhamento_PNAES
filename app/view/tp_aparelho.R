@@ -81,7 +81,7 @@ server <- function(id, dados, filtro) {
         e_charts(tp.aparelho) %>%
         e_pie(Quantidade,
               percentPrecision = 2,
-              center = c("65%", "50%"),
+              center = c("50%", "50%"),
               itemStyle = list(borderColor = "rgba(0, 0, 0, 0.30)"),
               labelLine = list(show = TRUE,
                                length = 5,
