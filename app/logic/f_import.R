@@ -12,7 +12,7 @@ f_importar <- function(){
   
  
   
-  dados <- readRDS("app/data/dados.rds") %>% 
+  dados <- readRDS("app/data/dados.Rds") %>% 
     as_tibble() %>%
     mutate(DR2 = case_when(DR == "AC" ~ "12",
                            DR == "AL" ~ "27",
