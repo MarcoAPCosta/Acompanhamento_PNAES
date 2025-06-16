@@ -12,7 +12,7 @@ box::use(
 pop_b <- function(x){
   saida <- x %>% 
     formatar_numero(ndigitos = 0)
-  print(saida)
+  
   return(saida)
 }
 
